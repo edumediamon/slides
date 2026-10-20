@@ -1,0 +1,55 @@
+name: Test and deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+      - run: npm test
+      - name: Build Markdown catalog and copy theme previews
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+      - name: Check generated catalog and education preview
+        run: |
+          test -f _site/index.html
+          test -f _site/themes/education/reference.html
+          test ! -f _site/gallery/index.html
+          grep -q 'themes/education/reference.html' _site/index.html
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: ./_site
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - name: Deploy catalog and previews
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,5 +1,7 @@
 # 🎯 make-slide — AI 프레젠테이션 스킬 기획서
 
+> 원본 프로젝트의 과거 기획 기록입니다. 현재 `edumediamon/slides` 미러의 11개 테마, Markdown 카탈로그, GitHub Pages 배포 구조는 [README.md](README.md)를 기준으로 합니다.
+
 > AI 코딩 에이전트가 단일 HTML 파일로 발표 슬라이드를 생성하는 범용 스킬
 > 대상: Claude Code, Gemini CLI, Codex 등 모든 AI 코딩 도구
 

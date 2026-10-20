@@ -5,7 +5,8 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 const SKILL_DIR = '.claude/skills/make-slide';
-const GALLERY_URL = 'https://make-slide.vercel.app';
+const REPOSITORY_URL = 'https://github.com/edumediamon/slides';
+const GALLERY_URL = `${REPOSITORY_URL}/tree/main/gallery`;
 
 const THEMES = [
   { id: 'minimal-dark',   style: 'Clean dark, white typography',        bestFor: 'Tech talks, developer conferences' },
@@ -67,7 +68,7 @@ function cmdInit() {
   const srcSkill = path.join(packageRoot, SKILL_DIR);
 
   if (!fs.existsSync(srcSkill)) {
-    console.error('❌ Skill template not found. Reinstall with: npx make-slide init');
+    console.error('❌ Skill template not found. Reinstall from https://github.com/edumediamon/slides');
     process.exit(1);
   }
 
@@ -75,7 +76,9 @@ function cmdInit() {
 
   // Copy skill files
   console.log('📁 Copying skill files...');
-  copyDirSync(srcSkill, destSkill);
+  if (path.resolve(srcSkill) !== path.resolve(destSkill)) {
+    copyDirSync(srcSkill, destSkill);
+  }
   console.log(`   ✅ ${SKILL_DIR}/`);
 
   // Auto-detect and inject into AI config files
@@ -112,7 +115,7 @@ function cmdInit() {
   console.log('Next steps:');
   console.log('  1. Type /make-slide in Claude Code to create a presentation');
   console.log(`  2. Browse themes: ${GALLERY_URL}`);
-  console.log('  3. Run: npx make-slide themes');
+  console.log('  3. Run: make-slide themes (or node bin/cli.js themes in the mirror checkout)');
 }
 
 function cmdThemes() {
@@ -143,13 +146,14 @@ function cmdHelp() {
   console.log('🎯 make-slide — AI presentation skill');
   console.log('');
   console.log('Commands:');
-  console.log('  npx make-slide init      Install skill into current project');
-  console.log('  npx make-slide themes    Show available themes');
-  console.log('  npx make-slide gallery   Open theme gallery in browser');
-  console.log('  npx make-slide help      Show this help');
+  console.log('  make-slide init      Install skill into current project');
+  console.log('  make-slide themes    Show available themes');
+  console.log('  make-slide gallery   Open GitHub theme catalog in browser');
+  console.log('  make-slide help      Show this help');
+  console.log('  From a mirror checkout: node bin/cli.js <command>');
   console.log('');
   console.log(`Gallery: ${GALLERY_URL}`);
-  console.log('GitHub:  https://github.com/Kuneosu/make-slide');
+  console.log(`GitHub:  ${REPOSITORY_URL}`);
   console.log('');
 }
 

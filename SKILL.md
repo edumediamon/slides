@@ -2,12 +2,14 @@
 
 ## Overview
 
+This is the `edumediamon/slides` mirror of [Kuneosu/make-slide](https://github.com/Kuneosu/make-slide), with education as theme 11. For the modular workflow, read [the installable skill](.claude/skills/make-slide/SKILL.md).
+
 **make-slide** is a universal skill for AI coding agents that generates single-file HTML presentations with speaker notes. The output is always a standalone `.html` file with all CSS and JS inlined — no build step, no framework, no dependencies beyond font CDNs.
 
 Any AI coding tool (Claude Code, Gemini CLI, Codex, Cursor, etc.) can read this file and follow the instructions to generate professional presentations.
 
-**Repository**: [github.com/kuneosu/make-slide](https://github.com/kuneosu/make-slide)
-**Theme Gallery**: [make-slide.vercel.app](https://make-slide.vercel.app)
+**Repository**: [github.com/edumediamon/slides](https://github.com/edumediamon/slides)
+**Theme Gallery**: [GitHub theme catalog](https://github.com/edumediamon/slides/tree/main/gallery)
 
 ---
 
@@ -73,7 +75,7 @@ Follow these steps in order:
 
 ### Step 2: Choose a Theme
 Present the user with the theme gallery link for browsing:
-> **Browse themes here**: https://make-slide.vercel.app
+> **Browse themes here**: https://github.com/edumediamon/slides/tree/main/gallery
 
 If the user doesn't choose a theme, recommend one based on context:
 - Tech/developer talk → `minimal-dark` or `neon-terminal`
@@ -108,7 +110,7 @@ Fetch the chosen theme's reference files from GitHub:
 1. **reference.html** — The complete example presentation with all slide types, styles, navigation, and interactive features. This is your primary template.
 2. **README.md** — Design guidelines including color palette, typography, spacing rules, and design philosophy.
 
-Use the raw GitHub URLs listed in the Theme List section below.
+Prefer the selected theme files in this checkout when available. Otherwise use the mirror raw GitHub URLs listed in the Theme List section below.
 
 ### Step 6: Generate HTML
 Using the reference.html as your template:
@@ -154,17 +156,17 @@ For Mode C, the user already has a script — skip this step.
 
 | # | Theme ID | Style | Best For | Reference HTML | README |
 |---|----------|-------|----------|---------------|--------|
-| 1 | `minimal-dark` | Clean dark background, white typography, modern minimal | Tech conferences, developer talks, open source presentations | [reference.html](https://raw.githubusercontent.com/kuneosu/make-slide/main/themes/minimal-dark/reference.html) | [README.md](https://raw.githubusercontent.com/kuneosu/make-slide/main/themes/minimal-dark/README.md) |
-| 2 | `minimal-light` | Bright white background, precise typography, Apple-inspired | General presentations, corporate meetings, academic lectures | [reference.html](https://raw.githubusercontent.com/kuneosu/make-slide/main/themes/minimal-light/reference.html) | [README.md](https://raw.githubusercontent.com/kuneosu/make-slide/main/themes/minimal-light/README.md) |
-| 3 | `corporate` | Navy and gold accents, professional structured layout | Business presentations, investor meetings, quarterly reports | [reference.html](https://raw.githubusercontent.com/kuneosu/make-slide/main/themes/corporate/reference.html) | [README.md](https://raw.githubusercontent.com/kuneosu/make-slide/main/themes/corporate/README.md) |
-| 4 | `gradient-pop` | Vibrant purple-pink-orange gradients, glass-morphism cards | Startup pitches, product launches, marketing campaigns | [reference.html](https://raw.githubusercontent.com/kuneosu/make-slide/main/themes/gradient-pop/reference.html) | [README.md](https://raw.githubusercontent.com/kuneosu/make-slide/main/themes/gradient-pop/README.md) |
-| 5 | `neon-terminal` | Terminal-style dark theme, neon green/cyan, scanline effects | Developer conferences, hackathons, CTF events, security talks | [reference.html](https://raw.githubusercontent.com/kuneosu/make-slide/main/themes/neon-terminal/reference.html) | [README.md](https://raw.githubusercontent.com/kuneosu/make-slide/main/themes/neon-terminal/README.md) |
-| 6 | `paper` | Warm kraft-paper aesthetic, serif typography, terracotta accents | Educational talks, academic conferences, workshops, research | [reference.html](https://raw.githubusercontent.com/kuneosu/make-slide/main/themes/paper/reference.html) | [README.md](https://raw.githubusercontent.com/kuneosu/make-slide/main/themes/paper/README.md) |
-| 7 | `keynote-apple` | Dramatic dark/gradient backgrounds, Apple keynote-inspired | Product launches, keynote conferences, executive briefings | [reference.html](https://raw.githubusercontent.com/kuneosu/make-slide/main/themes/keynote-apple/reference.html) | [README.md](https://raw.githubusercontent.com/kuneosu/make-slide/main/themes/keynote-apple/README.md) |
-| 8 | `magazine` | Editorial magazine layout, asymmetric design, dramatic typography | Design presentations, portfolio reviews, brand guidelines | [reference.html](https://raw.githubusercontent.com/kuneosu/make-slide/main/themes/magazine/reference.html) | [README.md](https://raw.githubusercontent.com/kuneosu/make-slide/main/themes/magazine/README.md) |
-| 9 | `data-focus` | Clean data-centric layout, dashboard aesthetics, trend indicators | Data analysis, KPI dashboards, financial reviews, statistical reports | [reference.html](https://raw.githubusercontent.com/kuneosu/make-slide/main/themes/data-focus/reference.html) | [README.md](https://raw.githubusercontent.com/kuneosu/make-slide/main/themes/data-focus/README.md) |
-| 10 | `playful` | Rounded corners, pastel colors, emoji accents, bouncy animations | Team workshops, casual tech talks, retrospectives, community events | [reference.html](https://raw.githubusercontent.com/kuneosu/make-slide/main/themes/playful/reference.html) | [README.md](https://raw.githubusercontent.com/kuneosu/make-slide/main/themes/playful/README.md) |
-| 11 | `education` | Clean white canvas, green highlights, split cards | Education, certification exams, academic lectures | [reference.html](https://raw.githubusercontent.com/kuneosu/make-slide/main/themes/education/reference.html) | [README.md](https://raw.githubusercontent.com/kuneosu/make-slide/main/themes/education/README.md) |
+| 1 | `minimal-dark` | Clean dark background, white typography, modern minimal | Tech conferences, developer talks, open source presentations | [reference.html](https://raw.githubusercontent.com/edumediamon/slides/main/themes/minimal-dark/reference.html) | [README.md](https://raw.githubusercontent.com/edumediamon/slides/main/themes/minimal-dark/README.md) |
+| 2 | `minimal-light` | Bright white background, precise typography, Apple-inspired | General presentations, corporate meetings, academic lectures | [reference.html](https://raw.githubusercontent.com/edumediamon/slides/main/themes/minimal-light/reference.html) | [README.md](https://raw.githubusercontent.com/edumediamon/slides/main/themes/minimal-light/README.md) |
+| 3 | `corporate` | Navy and gold accents, professional structured layout | Business presentations, investor meetings, quarterly reports | [reference.html](https://raw.githubusercontent.com/edumediamon/slides/main/themes/corporate/reference.html) | [README.md](https://raw.githubusercontent.com/edumediamon/slides/main/themes/corporate/README.md) |
+| 4 | `gradient-pop` | Vibrant purple-pink-orange gradients, glass-morphism cards | Startup pitches, product launches, marketing campaigns | [reference.html](https://raw.githubusercontent.com/edumediamon/slides/main/themes/gradient-pop/reference.html) | [README.md](https://raw.githubusercontent.com/edumediamon/slides/main/themes/gradient-pop/README.md) |
+| 5 | `neon-terminal` | Terminal-style dark theme, neon green/cyan, scanline effects | Developer conferences, hackathons, CTF events, security talks | [reference.html](https://raw.githubusercontent.com/edumediamon/slides/main/themes/neon-terminal/reference.html) | [README.md](https://raw.githubusercontent.com/edumediamon/slides/main/themes/neon-terminal/README.md) |
+| 6 | `paper` | Warm kraft-paper aesthetic, serif typography, terracotta accents | Educational talks, academic conferences, workshops, research | [reference.html](https://raw.githubusercontent.com/edumediamon/slides/main/themes/paper/reference.html) | [README.md](https://raw.githubusercontent.com/edumediamon/slides/main/themes/paper/README.md) |
+| 7 | `keynote-apple` | Dramatic dark/gradient backgrounds, Apple keynote-inspired | Product launches, keynote conferences, executive briefings | [reference.html](https://raw.githubusercontent.com/edumediamon/slides/main/themes/keynote-apple/reference.html) | [README.md](https://raw.githubusercontent.com/edumediamon/slides/main/themes/keynote-apple/README.md) |
+| 8 | `magazine` | Editorial magazine layout, asymmetric design, dramatic typography | Design presentations, portfolio reviews, brand guidelines | [reference.html](https://raw.githubusercontent.com/edumediamon/slides/main/themes/magazine/reference.html) | [README.md](https://raw.githubusercontent.com/edumediamon/slides/main/themes/magazine/README.md) |
+| 9 | `data-focus` | Clean data-centric layout, dashboard aesthetics, trend indicators | Data analysis, KPI dashboards, financial reviews, statistical reports | [reference.html](https://raw.githubusercontent.com/edumediamon/slides/main/themes/data-focus/reference.html) | [README.md](https://raw.githubusercontent.com/edumediamon/slides/main/themes/data-focus/README.md) |
+| 10 | `playful` | Rounded corners, pastel colors, emoji accents, bouncy animations | Team workshops, casual tech talks, retrospectives, community events | [reference.html](https://raw.githubusercontent.com/edumediamon/slides/main/themes/playful/reference.html) | [README.md](https://raw.githubusercontent.com/edumediamon/slides/main/themes/playful/README.md) |
+| 11 | `education` | Clean white canvas, green highlights, split cards | Education, certification exams, academic lectures | [reference.html](https://raw.githubusercontent.com/edumediamon/slides/main/themes/education/reference.html) | [README.md](https://raw.githubusercontent.com/edumediamon/slides/main/themes/education/README.md) |
 
 ---
 
@@ -508,4 +510,4 @@ If the user says: *"Make a 10-minute presentation about Python best practices"*
 
 ---
 
-*Skill version: 1.0 | Repository: [kuneosu/make-slide](https://github.com/kuneosu/make-slide)*
+*Skill version: 1.0 | Repository: [edumediamon/slides](https://github.com/edumediamon/slides)*

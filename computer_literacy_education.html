@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>컴퓨터 활용 핵심 마스터 — Education Theme (8 Slides)</title>
+  
+  <!-- Pretendard & JetBrains Mono Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap">
+  
+  <style>
+    /* ========================================================
+       THEME: EDUCATION (make-slide theme #11)
+       Clean White Canvas + Slate Stage + Interactive Educational Cards
+       ======================================================== */
+    :root {
+      --bg-body: #f8fafc;
+      --stage-bg: #f1f5f9;
+      --canvas-bg: #ffffff;
+      
+      /* Primary Blue Accent */
+      --accent-blue: #0284c7;
+      --accent-blue-light: #e0f2fe;
+      --accent-blue-border: #bae6fd;
+      
+      /* Emerald Success Accent */
+      --accent-emerald: #059669;
+      --accent-emerald-light: #d1fae5;
+      --accent-emerald-border: #86efac;
+      --text-emerald: #15803d;
+      
+      /* Amber Notice Accent */
+      --accent-amber: #d97706;
+      --accent-amber-light: #fef3c7;
+      
+      /* Rose Warning/Trap Accent */
+      --accent-rose: #e11d48;
+      --accent-rose-light: #ffe4e6;
+      --text-rose: #dc2626;
+      
+      /* Purple Category Accent */
+      --accent-purple: #7c3aed;
+      --accent-purple-light: #ede9fe;
+      
+      /* Base Surface & Text */
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-sub: #334155;
+      --text-muted: #64748b;
+      
+      /* Shadows */
+      --shadow-canvas: 0 20px 40px -15px rgba(15, 23, 42, 0.08), 0 0 1px 1px rgba(15, 23, 42, 0.05);
+      --shadow-card: 0 4px 12px -2px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.05);
+      --shadow-card-hover: 0 10px 25px -5px rgba(2, 132, 199, 0.12), 0 4px 10px rgba(0, 0, 0, 0.04);
+      
+      /* Typography */
+      --font-body: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --font-code: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: var(--font-body);
+      background: var(--bg-body);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* 상단 프로그레스 바 */
+    .progress-bar-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(226, 232, 240, 0.6);
+      z-index: 100;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-blue) 0%, var(--accent-emerald) 100%);
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* 초록색 핵심 형광 하이라이트 */
+    .hl-green,
+    u,
+    .u-highlight {
+      text-decoration: none;
+      background-color: #dcfce7 !important;
+      color: #15803d !important;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 800;
+      border-bottom: 2.5px solid #22c55e;
+      box-shadow: 0 1px 2px rgba(34, 197, 94, 0.12);
+      display: inline-block;
+    }
+
+    code,
+    .code {
+      font-family: var(--font-code);
+      font-weight: 700;
+    }
+
+    .presentation-container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      background: var(--stage-bg);
+      overflow: hidden;
+    }
+
+    /* Top Bar */
+    .header-bar {
+      height: 54px;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #e2e8f0;
+      background: #ffffff;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+      z-index: 20;
+    }
+
+    .badge-subject {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 14px;
+      border-radius: 9999px;
+      background: var(--accent-blue-light);
+      border: 1px solid var(--accent-blue-border);
+      color: var(--accent-blue);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .header-center {
+      font-size: 14px;
+      font-weight: 700;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ctrl-btn {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      color: #334155;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .ctrl-btn:hover {
+      background: var(--accent-blue);
+      color: #ffffff;
+      border-color: var(--accent-blue);
+    }
+
+    .slide-counter {
+      font-family: var(--font-code);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: #f1f5f9;
+      padding: 4px 12px;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Slide Stage Canvas */
+    .slide-stage {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 36px 8px 36px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Floating Navigation Arrows */
+    .side-nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid #cbd5e1;
+      color: #334155;
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 30;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+      user-select: none;
+    }
+
+    .side-nav-arrow:hover {
+      background: var(--accent-blue);
+      color: #ffffff;
+      border-color: var(--accent-blue);
+      transform: translateY(-50%) scale(1.08);
+      box-shadow: 0 8px 24px rgba(2, 132, 199, 0.25);
+    }
+
+    .side-nav-arrow:active {
+      transform: translateY(-50%) scale(0.96);
+    }
+
+    .side-nav-arrow.prev {
+      left: 14px;
+    }
+
+    .side-nav-arrow.next {
+      right: 14px;
+    }
+
+    .slide-canvas {
+      width: 100%;
+      height: 100%;
+      max-width: 1320px;
+      max-height: 720px;
+      background: var(--canvas-bg);
+      border-radius: 20px;
+      box-shadow: var(--shadow-canvas);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      padding: 32px 42px;
+    }
+
+    /* Slide Component Structure */
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 32px 42px;
+      display: none;
+      flex-direction: column;
+      background: #ffffff;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .slide.active {
+      display: flex;
+      opacity: 1;
+      pointer-events: auto;
+      animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.995);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* 50:50 좌우 분할 컨테이너 */
+    .split-container {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 32px;
+      height: 100%;
+      align-items: center;
+    }
+
+    .left-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+      height: 100%;
+    }
+
+    .right-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      position: relative;
+    }
+
+    .anim-left {
+      animation: animLeft 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .anim-right {
+      animation: animRight 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes animLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes animRight {
+      from {
+        opacity: 0;
+        transform: translateX(20px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* 슬라이드 태그 (오버라인) */
+    .slide-tag {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .slide-tag::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 24px;
+      background: var(--accent-blue);
+      border-radius: 4px;
+    }
+
+    /* 슬라이드 제목 */
+    .slide-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    /* 정보 카드 (좌측 칼럼) */
+    .info-card {
+      background: #ffffff;
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 16px 20px;
+      box-shadow: var(--shadow-card);
+      border-left: 5px solid var(--accent-blue);
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .info-card.warning {
+      border-left-color: var(--accent-rose);
+      background: #fffbfa;
+    }
+
+    .info-card.success {
+      border-left-color: var(--accent-emerald);
+      background: #fbfdfc;
+    }
+
+    .info-card.amber {
+      border-left-color: var(--accent-amber);
+      background: #fffdfa;
+    }
+
+    .info-card.purple {
+      border-left-color: var(--accent-purple);
+      background: #fbfaff;
+    }
+
+    .card-title {
+      font-size: 19px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .info-card.warning .card-title {
+      color: var(--accent-rose);
+    }
+
+    .info-card.success .card-title {
+      color: var(--accent-emerald);
+    }
+
+    .info-card.amber .card-title {
+      color: var(--accent-amber);
+    }
+
+    .info-card.purple .card-title {
+      color: var(--accent-purple);
+    }
+
+    .card-desc {
+      font-size: 15.5px;
+      line-height: 1.6;
+      color: #334155;
+    }
+
+    .card-desc strong {
+      color: #0369a1;
+      font-weight: 700;
+    }
+
+    .card-desc .warn-text {
+      color: #e11d48;
+      font-weight: 800;
+      background: #fff1f2;
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    /* Key Badge 단축키 키캡 */
+    .key-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      font-family: var(--font-code);
+      font-size: 13.5px;
+      color: #0f172a;
+      font-weight: 800;
+      box-shadow: 0 2px 0 #94a3b8;
+      vertical-align: baseline;
+      margin: 0 2px;
+    }
+
+    .win-key {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      background-color: #0078d4;
+      vertical-align: -2px;
+      mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'><path fill='black' d='M0 2.247l6.545-.898v6.082H0V2.247zm0 6.643h6.545v6.082L0 14.074V8.89zM7.455 1.225L16 0v7.431H7.455V1.225zm8.545 7.665V16l-8.545-1.225V8.89H16z'/></svg>") no-repeat center;
+      -webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'><path fill='black' d='M0 2.247l6.545-.898v6.082H0V2.247zm0 6.643h6.545v6.082L0 14.074V8.89zM7.455 1.225L16 0v7.431H7.455V1.225zm8.545 7.665V16l-8.545-1.225V8.89H16z'/></svg>") no-repeat center;
+    }
+
+    /* 우측 시각화/인터랙션 카드 */
+    .morph-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      box-shadow: var(--shadow-card);
+      padding: 22px;
+      width: 100%;
+      max-width: 530px;
+      position: relative;
+    }
+
+    .morph-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px dashed #e2e8f0;
+      padding-bottom: 10px;
+    }
+
+    .morph-btn {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      color: #334155;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      font-family: inherit;
+    }
+
+    .morph-btn:hover {
+      background: var(--accent-blue);
+      color: #ffffff;
+      border-color: var(--accent-blue);
+      transform: scale(1.02);
+    }
+
+    .morph-btn.active {
+      background: var(--accent-blue);
+      color: #ffffff;
+      border-color: var(--accent-blue);
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+    }
+
+    /* 스타일 테이블 */
+    .styled-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 13.5px;
+    }
+
+    .styled-table th,
+    .styled-table td {
+      border: 1px solid #e2e8f0;
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    .styled-table th {
+      background: #f8fafc;
+      font-weight: 800;
+      color: #334155;
+      text-align: center;
+    }
+
+    .styled-table td.center {
+      text-align: center;
+    }
+
+    /* 3D 플립 카드 */
+    .flip-container {
+      perspective: 1000px;
+      width: 100%;
+      height: 125px;
+      cursor: pointer;
+    }
+
+    .flipper {
+      transition: 0.5s transform cubic-bezier(0.16, 1, 0.3, 1);
+      transform-style: preserve-3d;
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .flip-container.flipped .flipper {
+      transform: rotateY(180deg);
+    }
+
+    .flip-front,
+    .flip-back {
+      backface-visibility: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 14px;
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border: 1.5px solid #e2e8f0;
+      box-shadow: var(--shadow-card);
+    }
+
+    .flip-front {
+      background: #ffffff;
+      z-index: 2;
+      border-left: 5px solid #0284c7;
+    }
+
+    .flip-back {
+      transform: rotateY(180deg);
+      background: #f0fdf4;
+      border: 1.5px solid #86efac;
+      border-left: 5px solid #22c55e;
+    }
+
+    /* Title Slide Specifics */
+    .title-h1 {
+      font-size: 46px;
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1.25;
+      margin-bottom: 16px;
+      letter-spacing: -0.03em;
+      text-align: center;
+    }
+
+    .title-h1 span {
+      background: linear-gradient(135deg, #0284c7 0%, #059669 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .title-sub {
+      font-size: 18.5px;
+      color: #475569;
+      font-weight: 600;
+      text-align: center;
+      max-width: 860px;
+      line-height: 1.6;
+      margin: 0 auto;
+    }
+
+    .title-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 18px;
+      border-radius: 9999px;
+      background: #e0f2fe;
+      color: #0284c7;
+      font-size: 14.5px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      border: 1px solid #bae6fd;
+    }
+
+    /* 하단 키보드 단축키 안내 바 */
+    .key-shortcuts-bar {
+      height: 34px;
+      background: #ffffff;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      font-size: 12px;
+      color: #64748b;
+      user-select: none;
+    }
+
+    .key-shortcuts-bar kbd {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+      color: #334155;
+      font-family: var(--font-code);
+    }
+
+    /* 발표자 강의 대본창 (Speaker Notes Drawer) */
+    .speaker-notes-drawer {
+      position: absolute;
+      bottom: 34px;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(10px);
+      border-top: 2.5px solid var(--accent-emerald);
+      box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.08);
+      z-index: 40;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(100%);
+      max-height: 195px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .speaker-notes-drawer.open {
+      transform: translateY(0);
+    }
+
+    .notes-header {
+      padding: 8px 24px;
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+    }
+
+    .notes-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #059669;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .notes-content {
+      padding: 14px 28px;
+      overflow-y: auto;
+      font-size: 14.5px;
+      line-height: 1.65;
+      color: #1e293b;
+      font-weight: 500;
+    }
+
+    .notes-content strong {
+      color: #0284c7;
+      font-weight: 800;
+    }
+
+    .notes-content mark {
+      background: #dcfce7;
+      color: #15803d;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    /* PDF Print Optimization */
+    @media print {
+      body {
+        overflow: visible !important;
+        background: #ffffff !important;
+      }
+      .presentation-container {
+        width: 100% !important;
+        height: auto !important;
+        background: #ffffff !important;
+      }
+      .progress-bar-container,
+      .header-bar,
+      .side-nav-arrow,
+      .speaker-notes-drawer,
+      .key-shortcuts-bar,
+      .morph-btn,
+      button {
+        display: none !important;
+      }
+      .slide-stage {
+        padding: 0 !important;
+        display: block !important;
+      }
+      .slide-canvas {
+        max-width: 100% !important;
+        max-height: 100% !important;
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+      }
+      .slide {
+        position: relative !important;
+        display: flex !important;
+        opacity: 1 !important;
+        page-break-after: always;
+        break-after: page;
+        width: 100vw !important;
+        height: 100vh !important;
+        padding: 40px !important;
+      }
+      @page {
+        size: landscape;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="presentation-container" id="presentationContainer">
+    <!-- 상단 프로그레스 바 -->
+    <div class="progress-bar-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- 상단 헤더 바 -->
+    <header class="header-bar">
+      <div class="badge-subject">
+        <span>💻</span>
+        <span>컴퓨터 활용 실무 & 자격증 완전정복</span>
+      </div>
+      <div class="header-center">
+        <span>스마트 오피스 생산성 및 시스템 진단 가이드</span>
+      </div>
+      <div class="header-controls">
+        <button class="ctrl-btn" onclick="toggleNotes()" title="단축키 N 또는 S">
+          🎙️ 강의 대본 (N)
+        </button>
+        <button class="ctrl-btn" onclick="toggleFullscreen()" title="단축키 F">
+          ⛶ 전체화면 (F)
+        </button>
+        <div class="slide-counter"><span id="curSlideNum">01</span> / <span id="totalSlideNum">08</span></div>
+      </div>
+    </header>
+
+    <!-- 슬라이드 메인 무대 -->
+    <main class="slide-stage">
+      <button class="side-nav-arrow prev" onclick="prevSlide()" title="이전 슬라이드 (◀ / Backspace)">‹</button>
+      <button class="side-nav-arrow next" onclick="nextSlide()" title="다음 슬라이드 (▶ / Space / Enter)">›</button>
+
+      <div class="slide-canvas" id="slideCanvas">
+
+        <!-- ========================================================
+             SLIDE 1 : Title Slide
+             ======================================================== -->
+        <section class="slide active"
+          data-notes="안녕하십니까. 현대 직장인과 수험생을 위한 '컴퓨터 활용 핵심 마스터' 특강입니다. 컴퓨터는 단순한 작업 도구를 넘어 업무 생산성과 문제 해결 능력을 결정짓는 핵심 역량입니다. 본 프레젠테이션에서는 하드웨어 기본 원리부터 Windows 고급 제어 및 단축키, 업무 자동화 스프레드시트 함수, 네트워크 장애 진단, 그리고 실전 보안 트러블슈팅까지 꼭 필요한 핵심 내용을 총 8장의 슬라이드로 완벽 정리해 드립니다.">
+          <div style="margin: auto; text-align: center; max-width: 900px;">
+            <div class="title-badge">2026 최신개정 • 스마트 오피스 & 실무 자격증</div>
+            <h1 class="title-h1"><span>컴퓨터 활용 핵심 마스터</span><br>하드웨어 • OS 제어 • 엑셀 • 네트워크</h1>
+            <p class="title-sub">업무 생산성 200% 향상을 위한 시스템 구조 이해와 실전 트러블슈팅 완벽 가이드</p>
+            <div style="margin-top: 28px; display: flex; gap: 12px; justify-content: center; align-items: center;">
+              <button onclick="nextSlide()"
+                style="background:#0284c7; color:#fff; border:none; padding:12px 28px; border-radius:10px; font-weight:800; cursor:pointer; font-size:16px; box-shadow:0 4px 14px rgba(2,132,199,0.35); transition:all 0.2s;"
+                onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                강의 시작하기 ▶
+              </button>
+              <button onclick="goTo(2)"
+                style="background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; padding:12px 20px; border-radius:10px; font-weight:700; cursor:pointer; font-size:15px; transition:all 0.2s;"
+                onmouseover="this.style.background='#e2e8f0'" onmouseout="this.style.background='#f1f5f9'">
+                목차 바로가기 📑
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             SLIDE 2 : Agenda & Roadmap
+             ======================================================== -->
+        <section class="slide"
+          data-notes="오늘 학습할 전체 6대 핵심 영역 로드맵입니다. 첫째, 컴퓨터 5대 장치와 SSD 최적화 등 하드웨어 기초, 둘째, 작업 관리자와 윈도우 필수 단축키 등 OS 제어, 셋째, 실무 칼퇴를 부르는 엑셀 핵심 함수 5종, 넷째, 인터넷 연결 장애를 1초 만에 파악하는 네트워크 DOS 진단 명령어, 다섯째, 3D 플립 카드로 풀어보는 킬러 함정 퀴즈 순으로 진행됩니다. 우측 바로가기 버튼을 클릭하여 원하는 단원으로 즉시 점프할 수도 있습니다.">
+          <div class="split-container">
+            <div class="left-col anim-left">
+              <div>
+                <div class="slide-tag">LEARNING ROADMAP</div>
+                <h2 class="slide-title">컴퓨터 활용 <span class="hl-green">6대 핵심 로드맵</span></h2>
+              </div>
+              <div class="info-card">
+                <div class="card-title">1. 하드웨어 구조 & 스토리지 최적화</div>
+                <div class="card-desc">컴퓨터 5대 장치(CPU/메모리/입출력) 및 SSD vs HDD 파티션 관리</div>
+              </div>
+              <div class="info-card success">
+                <div class="card-title">2. Windows 시스템 제어 & 슈퍼 단축키</div>
+                <div class="card-desc">작업 관리자 프로세스 제어, Win+R 실행 창 도구, 클립보드 히스토리</div>
+              </div>
+              <div class="info-card amber">
+                <div class="card-title">3. 엑셀/스프레드시트 실무 5대 필수 함수</div>
+                <div class="card-desc">VLOOKUP/XLOOKUP 데이터 조회, SUMIFS/COUNTIFS 조건 집계</div>
+              </div>
+              <div class="info-card purple">
+                <div class="card-title">4. 네트워크 진단 & 실전 3D 플립 퀴즈</div>
+                <div class="card-desc">TCP/IP 4대 요소, Ping/Ipconfig/Tracert, 기출 오답 파훼 OX 퀴즈</div>
+              </div>
+            </div>
+            <div class="right-col anim-right">
+              <div class="morph-card" style="padding: 22px; width: 100%;">
+                <div style="font-size: 15px; font-weight: 800; color: #0284c7; margin-bottom: 14px;">
+                  ⚡ 원하는 토픽으로 즉시 이동 (Click Jump)
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr; gap: 9px;">
+                  <button class="morph-btn" onclick="goTo(3)">03. 하드웨어 5대 장치 & 스토리지</button>
+                  <button class="morph-btn" onclick="goTo(4)">04. Windows OS 제어 & 슈퍼 단축키</button>
+                  <button class="morph-btn" onclick="goTo(5)">05. 스프레드시트 5대 필수 함수</button>
+                  <button class="morph-btn" onclick="goTo(6)">06. 네트워크 TCP/IP & DOS 명령어</button>
+                  <button class="morph-btn" onclick="goTo(7)">07. 🎯 킬러 함정 3D 플립 OX 퀴즈</button>
+                  <button class="morph-btn" onclick="goTo(8)">08. 종합 요약 & 완강 체크리스트</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             SLIDE 3 : Hardware & Storage
+             ======================================================== -->
+        <section class="slide"
+          data-notes="3번 슬라이드는 컴퓨터의 5대 핵심 장치와 저장장치 관리입니다. 컴퓨터는 입력, 제어, 기억, 연산, 출력의 5가지 장치로 구성됩니다. CPU는 제어장치와 연산장치(ALU), 레지스터로 구성되어 컴퓨터의 두뇌 역할을 합니다. 스토리지는 물리적 회전 원판을 쓰는 HDD에서 반도체 기반의 초고속 NVMe SSD로 완전히 전환되었습니다. 중요한 점은 SSD는 기계적 헤드가 없으므로 '디스크 조각 모음'을 절대 수행하면 안 되며, 수명 단축을 막기 위해 TRIM 기능과 디스크 파티션 분할을 활용해야 합니다.">
+          <div class="split-container">
+            <div class="left-col anim-left">
+              <div>
+                <div class="slide-tag">TOPIC 01 • HARDWARE & STORAGE</div>
+                <h2 class="slide-title">컴퓨터 5대 장치 & <span class="hl-green">스토리지 관리</span></h2>
+              </div>
+              <div class="info-card">
+                <div class="card-title">1. 컴퓨터 5대 핵심 장치 구조</div>
+                <div class="card-desc">
+                  • <strong>중앙처리장치 (CPU)</strong>: <span class="hl-green">제어장치(지시·감독) + 연산장치(ALU) + 레지스터</span><br>
+                  • <strong>기억장치</strong>: 주기억(RAM/ROM)과 보조기억(SSD/HDD)<br>
+                  • <strong>입출력장치</strong>: 키보드·마우스(입력) / 모니터·프린터(출력)
+                </div>
+              </div>
+              <div class="info-card success">
+                <div class="card-title">2. SSD vs HDD 관리 핵심 원칙 ★</div>
+                <div class="card-desc">
+                  • <strong>SSD (반도체)</strong>: 압도적 속도, 무소음, <span class="warn-text">디스크 조각 모음 금지 (수명 저하)</span><br>
+                  • <strong>HDD (자기 디스크)</strong>: 대용량 보관용, 물리적 충격 주의<br>
+                  • <strong>파티션 분할</strong>: [디스크 관리]에서 C:(OS)와 D:(데이터) 분리 관리
+                </div>
+              </div>
+            </div>
+            <div class="right-col anim-right">
+              <div class="morph-card">
+                <div class="morph-title">
+                  <span>💾 스토리지 및 메모리 계층 비교</span>
+                </div>
+                <table class="styled-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 25%;">장치 구분</th>
+                      <th style="width: 35%;">특징 및 속도</th>
+                      <th>핵심 관리 포인트</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="background:#f0fdf4;">
+                      <td style="font-weight:800; color:#15803d;">레지스터 / 캐시</td>
+                      <td>CPU 내부 극초고속 메모리</td>
+                      <td>데이터 처리 병목 완화 (SRAM)</td>
+                    </tr>
+                    <tr style="background:#e0f2fe;">
+                      <td style="font-weight:800; color:#0284c7;">주기억장치 (RAM)</td>
+                      <td>휘발성 메모리 (전원 꺼지면 소멸)</td>
+                      <td>다중 작업 시 16GB 이상 권장</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight:800;">NVMe SSD</td>
+                      <td>PCIe 고속 대역폭 (반도체)</td>
+                      <td>TRIM 활성화, 조각모음 금지</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight:800;">HDD</td>
+                      <td>대용량 보조 스토리지</td>
+                      <td>장기 백업 및 아카이빙 전용</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div
+                  style="font-size: 13.5px; color: #15803d; background: #f0fdf4; padding: 10px; border-radius: 8px; border: 1px solid #86efac; margin-top: 14px;">
+                  💡 <strong>기출 & 실무 공식</strong>: SSD는 기계적 탐색 시간이 없으므로 조각 모음이 불필요하며, 수명 보존을 위해 트림(TRIM) 최적화를 사용합니다.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             SLIDE 4 : Windows OS & Shortcuts
+             ======================================================== -->
+        <section class="slide"
+          data-notes="4번 슬라이드는 운영체제 제어와 실무 단축키입니다. 먹통이 된 프로그램을 해결할 때 사용하는 단축키는 Ctrl+Shift+Esc 작업 관리자입니다. 여기서 응답 없는 앱을 강제 종료할 수 있지만, 실행 순서 변경이나 디스크 전체 용량 확인은 불가능하다는 시험 함정을 주의하세요. 그리고 실행 창 단축키인 Win+R을 활용하여 devmgmt.msc(장치 관리자)나 sysdm.cpl(시스템 속성)을 직접 호출하면 마우스 클릭을 획기적으로 줄일 수 있습니다. 특히 Win+V(클립보드 히스토리)와 Win+Shift+S(부분 캡처)는 일상 업무 효율을 극대화합니다.">
+          <div class="split-container">
+            <div class="left-col anim-left">
+              <div>
+                <div class="slide-tag">TOPIC 02 • OS & SHORTCUTS</div>
+                <h2 class="slide-title">Windows 제어 & <span class="hl-green">업무 단축키 200%</span></h2>
+              </div>
+              <div class="info-card">
+                <div class="card-title">1. 작업 관리자 핵심 제어 (Ctrl + Shift + Esc)</div>
+                <div class="card-desc">
+                  • 단축키: <span class="key-badge">Ctrl</span> + <span class="key-badge">Shift</span> + <span class="key-badge">Esc</span><br>
+                  • 응답 없는 <span class="hl-green">프로그램 강제 종료</span> 및 실시간 CPU/RAM 자원 모니터링<br>
+                  • <span class="warn-text">시험 함정: 실행 중인 앱의 실행 순서 변경은 절대 불가!</span>
+                </div>
+              </div>
+              <div class="info-card warning">
+                <div class="card-title">2. 실행 창(Win + R) 필수 시스템 명령어</div>
+                <div class="card-desc">
+                  • <code>regedit</code>: 레지스트리 편집기 호출<br>
+                  • <code>devmgmt.msc</code>: 장치 관리자 (드라이버 충돌 점검)<br>
+                  • <code>sysdm.cpl</code>: 시스템 속성 (환경 변수, 고급 설정)
+                </div>
+              </div>
+            </div>
+            <div class="right-col anim-right">
+              <div class="morph-card">
+                <div class="morph-title">
+                  <span>⌨️ 실무자가 매일 쓰는 슈퍼 단축키 TOP 4</span>
+                </div>
+                <table class="styled-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 40%;">단축키 조합</th>
+                      <th>기능 및 실무 활용 팁</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="background:#f0fdf4;">
+                      <td>
+                        <span class="key-badge"><span class="win-key"></span></span> + <span class="key-badge">V</span>
+                      </td>
+                      <td><strong>클립보드 기록</strong> (복사한 텍스트/이미지 히스토리)</td>
+                    </tr>
+                    <tr style="background:#e0f2fe;">
+                      <td>
+                        <span class="key-badge"><span class="win-key"></span></span> + <span class="key-badge">Shift</span> + <span class="key-badge">S</span>
+                      </td>
+                      <td><strong>정밀 영역 캡처</strong> (지정한 사각 영역 즉시 캡처)</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span class="key-badge"><span class="win-key"></span></span> + <span class="key-badge">D</span>
+                      </td>
+                      <td><strong>바탕화면 바로가기</strong> (모든 창 최소화 토글)</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span class="key-badge">Alt</span> + <span class="key-badge">Tab</span>
+                      </td>
+                      <td><strong>실행 앱 빠른 전환</strong> (작업 창 전환)</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div
+                  style="font-size: 13.5px; color: #15803d; background: #f0fdf4; padding: 10px; border-radius: 8px; border: 1px solid #86efac; margin-top: 14px;">
+                  💡 <strong>생산성 팁</strong>: <span class="key-badge"><span class="win-key"></span></span> + <span class="key-badge">V</span>를 누르면 이전에 복사했던 여러 항목을 선택해 붙여넣을 수 있습니다.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             SLIDE 5 : Spreadsheet & Data Formulas
+             ======================================================== -->
+        <section class="slide"
+          data-notes="5번 슬라이드는 스프레드시트 핵심 함수입니다. 실무 엑셀에서 가장 많이 쓰이는 조회 함수는 VLOOKUP이며, 최근 엑셀에서는 좌우 방향 제한이 없고 열 삽입 시에도 수식이 깨지지 않는 XLOOKUP이 표준으로 자리잡았습니다. 또한 여러 조건을 동시에 만족하는 데이터의 합계는 SUMIFS, 개수는 COUNTIFS를 사용하며, 조건 분기는 IF 함수로 처리합니다. 수식에서 참조 위치를 고정할 때 F4 키를 눌러 $ 표시를 붙이는 절대 참조는 엑셀 작업의 기본기입니다.">
+          <div class="split-container">
+            <div class="left-col anim-left">
+              <div>
+                <div class="slide-tag">TOPIC 03 • SPREADSHEET & DATA</div>
+                <h2 class="slide-title">엑셀 칼퇴를 부르는 <span class="hl-green">5대 필수 함수</span></h2>
+              </div>
+              <div class="info-card">
+                <div class="card-title">1. 데이터 조회: VLOOKUP vs XLOOKUP ★</div>
+                <div class="card-desc">
+                  • <code>VLOOKUP(기준값, 범위, 열번호, FALSE)</code>: 왼쪽 첫 열에서 기준값 탐색<br>
+                  • <span class="hl-green"><code>XLOOKUP</code></span>: 왼쪽 탐색 한계 극복, 열 번호 대신 반환 범위 직접 지정
+                </div>
+              </div>
+              <div class="info-card success">
+                <div class="card-title">2. 다중 조건 통계: SUMIFS & COUNTIFS</div>
+                <div class="card-desc">
+                  • <code>SUMIFS(합계범위, 조건범위1, 조건1, 조건범위2, 조건2)</code><br>
+                  • <code>COUNTIFS(조건범위1, 조건1, 조건범위2, 조건2)</code>
+                </div>
+              </div>
+            </div>
+            <div class="right-col anim-right">
+              <div class="morph-card">
+                <div class="morph-title">
+                  <span>📊 실무 함수 구문 및 활용 예시</span>
+                </div>
+                <table class="styled-table" style="font-size: 13px;">
+                  <thead>
+                    <tr>
+                      <th style="width: 25%;">함수명</th>
+                      <th style="width: 38%;">구문 공식</th>
+                      <th>실무 활용 시나리오</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="background:#f0fdf4;">
+                      <td style="font-weight:800; color:#15803d;">XLOOKUP</td>
+                      <td><code>=XLOOKUP(사번, 사번열, 이름열)</code></td>
+                      <td>사번으로 직원명/직급 즉시 조회</td>
+                    </tr>
+                    <tr style="background:#e0f2fe;">
+                      <td style="font-weight:800; color:#0284c7;">SUMIFS</td>
+                      <td><code>=SUMIFS(매출, 부서, "영업", 월, 10)</code></td>
+                      <td>특정 부서의 10월 총매출 합산</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight:800;">COUNTIFS</td>
+                      <td><code>=COUNTIFS(점수, ">=80", 출석, ">=15")</code></td>
+                      <td>기준 점수와 출석 동시 충족 인원수</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight:800;">IFERROR</td>
+                      <td><code>=IFERROR(수식, "미확인")</code></td>
+                      <td>#N/A 또는 #DIV/0! 오류 깔끔하게 숨기기</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div
+                  style="font-size: 13.5px; color: #15803d; background: #f0fdf4; padding: 10px; border-radius: 8px; border: 1px solid #86efac; margin-top: 14px;">
+                  💡 <strong>참조 고정 단축키</strong>: 수식 입력 중 <span class="key-badge">F4</span>를 누르면 <code>$A$1</code>(절대참조)로 순환 변경됩니다.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             SLIDE 6 : Network TCP/IP & DOS Diagnostics
+             ======================================================== -->
+        <section class="slide"
+          data-notes="6번 슬라이드는 네트워크 설정과 장애 진단 명령어입니다. 인터넷에 정상적으로 연결되기 위해 단말기에 입력되어야 하는 4대 필수 요소는 IP 주소, 서브넷 마스크, 기본 게이트웨이, DNS 서버 주소입니다. 인터넷이 갑자기 끊겼을 때 DOS 명령어를 사용하면 원인을 즉시 파악할 수 있습니다. Ipconfig는 내 PC의 IP와 게이트웨이 주소를 확인하고, Ping은 공유기나 원격지 사이트와의 통신 연결 상태를 점검하며, Tracert는 패킷이 거쳐가는 라우팅 경로를 추적합니다. 이 세 명령어의 역할을 뒤바꾼 오답이 자격증 시험에 매우 빈번하게 출제됩니다.">
+          <div class="split-container">
+            <div class="left-col anim-left">
+              <div>
+                <div class="slide-tag">TOPIC 04 • NETWORK & DIAGNOSTICS</div>
+                <h2 class="slide-title">TCP/IP 4대 요소 & <span class="hl-green">DOS 진단 명령어</span></h2>
+              </div>
+              <div class="info-card">
+                <div class="card-title">1. 인터넷 통신 필수 4대 구성 요소 ★</div>
+                <div class="card-desc">
+                  • <span class="hl-green">IP 주소</span>: 네트워크 상의 내 PC 고유 번호<br>
+                  • <span class="hl-green">서브넷 마스크</span>: 네트워크 ID와 호스트 ID 분할 규격<br>
+                  • <span class="hl-green">기본 게이트웨이</span>: 외부 인터넷으로 나가는 출입 관문 (공유기 라우터)<br>
+                  • <span class="hl-green">DNS 서버</span>: 문자 도메인(google.com)을 숫자 IP로 변환
+                </div>
+              </div>
+              <div class="info-card purple">
+                <div class="card-title">2. IP 자동 할당 (DHCP)</div>
+                <div class="card-desc">
+                  • 공유기로부터 IP를 수동 입력 없이 <span class="hl-green">동적으로 자동 할당</span>받는 프로토콜
+                </div>
+              </div>
+            </div>
+            <div class="right-col anim-right">
+              <div class="morph-card">
+                <div class="morph-title">
+                  <span>⚡ 네트워크 3대 진단 명령어 비교 매트릭스</span>
+                </div>
+                <table class="styled-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 25%;">명령어</th>
+                      <th style="width: 32%;">핵심 키워드</th>
+                      <th>장애 진단 역할 및 시험 정답</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="background:#f0fdf4;">
+                      <td style="font-weight:800; color:#15803d;">Ping</td>
+                      <td><strong>연결 상태 점검</strong></td>
+                      <td>패킷 왕복 시간(ms)과 신호 손실률 측정</td>
+                    </tr>
+                    <tr style="background:#e0f2fe;">
+                      <td style="font-weight:800; color:#0284c7;">Ipconfig</td>
+                      <td><strong>내 PC 정보 확인</strong></td>
+                      <td>IP 주소, 게이트웨이, MAC 주소 확인 (<code>/all</code>)</td>
+                    </tr>
+                    <tr style="background:#fdf4ff;">
+                      <td style="font-weight:800; color:#7c3aed;">Tracert</td>
+                      <td><strong>경로 추적 (라우팅)</strong></td>
+                      <td>목적지 서버까지 거쳐가는 라우터 구간 추적</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div
+                  style="font-size: 13.5px; color: #15803d; background: #f0fdf4; padding: 10px; border-radius: 8px; border: 1px solid #86efac; margin-top: 14px;">
+                  💡 <strong>기출 지문 정답</strong>: "원격지 컴퓨터의 네트워크 연결 상태와 신호 손실률을 점검할 때 사용하는 명령어는 <strong>Ping</strong>이다."
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             SLIDE 7 : 🎯 Killer 3D Flip Cards (OX Quiz)
+             ======================================================== -->
+        <section class="slide"
+          data-notes="7번 슬라이드는 컴퓨터 활용 실무 및 자격증 시험에서 수험생들이 가장 많이 낚이는 '킬러 오답 함정' 3D 플립 퀴즈입니다. 우측의 카드를 클릭해 보세요. 카드가 180도 입체 회전하면서 O/X 정답과 상세한 해설이 나타납니다. 작업 관리자의 한계, 명령어 Tracert와 Ping의 차이, SSD 조각 모음 금지 원칙을 완벽히 이해했는지 확인하세요.">
+          <div class="split-container">
+            <div class="left-col anim-left">
+              <div>
+                <div class="slide-tag">KILLER TRAP • INTERACTIVE QUIZ</div>
+                <h2 class="slide-title">🎯 컴퓨터 활용 실전 <span class="hl-green">3D 플립 퀴즈</span></h2>
+              </div>
+              <div class="info-card">
+                <div class="card-title">💡 인터랙티브 플립 카드 학습 안내</div>
+                <div class="card-desc">
+                  • 우측의 문제를 읽고 카드를 <strong>클릭</strong>하면 카드가 뒤집히며 <strong>O/X 정답 및 기출 해설</strong>이 표시됩니다.<br>
+                  • 실전 시험과 업무에서 자주 겪는 치명적 오답 함정을 파훼합니다.
+                </div>
+              </div>
+              <div class="info-card success">
+                <div class="card-title">체크 포인트 3문항</div>
+                <div class="card-desc">
+                  • <strong>Q1</strong>: 작업 관리자에서 프로그램 실행 순서 변경 가능 여부<br>
+                  • <strong>Q2</strong>: Tracert 명령어의 주 목적 (경로 vs 왕복시간)<br>
+                  • <strong>Q3</strong>: SSD 저장장치에 디스크 조각 모음 수행 권장 여부
+                </div>
+              </div>
+            </div>
+            <div class="right-col anim-right" style="gap: 12px; width: 100%; max-width: 530px;">
+              <div class="flip-container" onclick="this.classList.toggle('flipped')">
+                <div class="flipper">
+                  <div class="flip-front">
+                    <div style="font-weight: 800; color: #0284c7; margin-bottom: 4px; font-size: 14.5px;">Q1. 작업 관리자 실행 순서 제어</div>
+                    <div style="font-size: 13.5px;">"Windows 작업 관리자에서는 실행 중인 프로그램들의 실행 순서를 임의로 변경할 수 있다." (O / X?)</div>
+                  </div>
+                  <div class="flip-back">
+                    <div style="font-weight: 800; color: #dc2626; margin-bottom: 2px; font-size: 14.5px;">정답: X (실행 순서 변경 절대 불가!)</div>
+                    <div style="font-size: 13px;">작업 관리자에서는 강제 종료 및 리소스 모니터링만 가능하며, <strong>실행 순서 변경은 불가능</strong>합니다!</div>
+                  </div>
+                </div>
+              </div>
+              <div class="flip-container" onclick="this.classList.toggle('flipped')">
+                <div class="flipper">
+                  <div class="flip-front">
+                    <div style="font-weight: 800; color: #0284c7; margin-bottom: 4px; font-size: 14.5px;">Q2. Tracert 명령어의 역할</div>
+                    <div style="font-size: 13.5px;">"Tracert 명령어는 원격지 호스트와의 왕복 응답 시간과 신호 손실률을 측정한다." (O / X?)</div>
+                  </div>
+                  <div class="flip-back">
+                    <div style="font-weight: 800; color: #dc2626; margin-bottom: 2px; font-size: 14.5px;">정답: X (왕복 시간 측정은 Ping!)</div>
+                    <div style="font-size: 13px;">패킷이 거치는 라우터를 추적하는 것은 <strong>Tracert</strong>이며, 연결 상태 및 응답 점검은 <strong>Ping</strong>입니다!</div>
+                  </div>
+                </div>
+              </div>
+              <div class="flip-container" onclick="this.classList.toggle('flipped')">
+                <div class="flipper">
+                  <div class="flip-front">
+                    <div style="font-weight: 800; color: #0284c7; margin-bottom: 4px; font-size: 14.5px;">Q3. SSD 스토리지의 디스크 조각 모음</div>
+                    <div style="font-size: 13.5px;">"SSD의 성능 유지를 위해 주기적으로 디스크 조각 모음을 실행하는 것이 좋다." (O / X?)</div>
+                  </div>
+                  <div class="flip-back">
+                    <div style="font-weight: 800; color: #dc2626; margin-bottom: 2px; font-size: 14.5px;">정답: X (SSD 조각 모음은 절대 금지!)</div>
+                    <div style="font-size: 13px;">SSD는 플래시 메모리 기반이므로 조각 모음이 불필요하며, 과도한 쓰기 작업으로 <strong>수명이 단축</strong>됩니다!</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             SLIDE 8 : Completion & Closing
+             ======================================================== -->
+        <section class="slide"
+          data-notes="축하드립니다! 컴퓨터 활용 핵심 8개 슬라이드 학습을 성공적으로 마치셨습니다. 하드웨어 5대 장치와 SSD 관리, 작업 관리자와 윈도우 단축키, 실무 엑셀 조회 함수, 그리고 네트워크 진단과 킬러 함정까지 마스터했습니다. 배운 내용을 실무와 자격증 시험에 적극 활용해 보세요. 여러분의 스마트 오피스 실무 마스터와 합격을 진심으로 응원합니다!">
+          <div style="margin: auto; text-align: center; max-width: 860px;">
+            <div style="font-size: 56px; margin-bottom: 16px;">🎓</div>
+            <div class="title-badge">컴퓨터 활용 완전정복 • 수료 완료</div>
+            <h2 class="title-h1" style="font-size: 38px;">컴퓨터 활용 8대 핵심 과정을<br><span>성공적으로 마스터하셨습니다!</span></h2>
+            <p class="title-sub" style="font-size: 17px; margin-bottom: 24px;">
+              컴퓨터 구조 이해부터 Windows 시스템 제어, 엑셀 핵심 수식, 네트워크 장애 진단 및 실전 OX 함정 파훼까지 스마트 오피스 역량을 완성했습니다.
+            </p>
+            <div style="display: flex; gap: 12px; justify-content: center;">
+              <button onclick="goTo(1)"
+                style="background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; padding:10px 22px; border-radius:10px; font-weight:700; cursor:pointer; font-size:14.5px; transition:all 0.2s;"
+                onmouseover="this.style.background='#e2e8f0'" onmouseout="this.style.background='#f1f5f9'">
+                첫 슬라이드로 돌아가기 ↺
+              </button>
+              <button onclick="goTo(2)"
+                style="background:#0284c7; color:#fff; border:none; padding:10px 22px; border-radius:10px; font-weight:800; cursor:pointer; font-size:14.5px; box-shadow:0 4px 12px rgba(2,132,199,0.3); transition:all 0.2s;"
+                onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                목차 다시 보기 📑
+              </button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- 발표자 강의 대본창 (Speaker Notes Drawer) -->
+    <div class="speaker-notes-drawer" id="notesDrawer">
+      <div class="notes-header">
+        <div class="notes-title">
+          <span>🎙️ 발표자 강의 대본 (Speaker Script)</span>
+          <span style="font-size:12px; color:#64748b; font-weight:normal;">(단축키: N 또는 S 키로 대본창 접기/펼치기)</span>
+        </div>
+        <button class="ctrl-btn" onclick="toggleNotes()">대본창 닫기 ✕</button>
+      </div>
+      <div class="notes-content" id="notesContent">
+        대본이 여기에 표시됩니다.
+      </div>
+    </div>
+
+    <!-- 하단 키보드 단축키 안내 바 -->
+    <footer class="key-shortcuts-bar">
+      <span><kbd>◀</kbd> / <kbd>Backspace</kbd> 이전</span>
+      <span><kbd>▶</kbd> / <kbd>Space</kbd> / <kbd>Enter</kbd> 다음</span>
+      <span><kbd>F</kbd> 전체화면</span>
+      <span><kbd>N</kbd> / <kbd>S</kbd> 강의 대본</span>
+      <span><kbd>Home</kbd> / <kbd>End</kbd> 처음 / 끝</span>
+    </footer>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const curSlideNumEl = document.getElementById('curSlideNum');
+    const totalSlideNumEl = document.getElementById('totalSlideNum');
+    const progressBar = document.getElementById('progressBar');
+    const notesDrawer = document.getElementById('notesDrawer');
+    const notesContent = document.getElementById('notesContent');
+    const presentationContainer = document.getElementById('presentationContainer');
+
+    totalSlideNumEl.textContent = String(totalSlides).padStart(2, '0');
+
+    function updateSlide(index) {
+      if (index < 0) index = 0;
+      if (index >= totalSlides) index = totalSlides - 1;
+
+      slides.forEach((s, idx) => {
+        s.classList.remove('active');
+        if (idx === index) {
+          s.classList.add('active');
+        }
+      });
+
+      currentSlide = index;
+      curSlideNumEl.textContent = String(currentSlide + 1).padStart(2, '0');
+
+      // 상단 프로그레스 바 갱신
+      const progressPercent = totalSlides > 1 ? (currentSlide / (totalSlides - 1)) * 100 : 100;
+      progressBar.style.width = `${progressPercent}%`;
+
+      // 대본창 내용 갱신
+      const notes = slides[currentSlide].getAttribute('data-notes') || '해당 슬라이드에 등록된 강의 대본이 없습니다.';
+      notesContent.innerHTML = notes;
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        updateSlide(currentSlide + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        updateSlide(currentSlide - 1);
+      }
+    }
+
+    function goTo(slideNumber) {
+      updateSlide(slideNumber - 1);
+    }
+
+    function toggleNotes() {
+      notesDrawer.classList.toggle('open');
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        if (presentationContainer.requestFullscreen) {
+          presentationContainer.requestFullscreen();
+        } else if (presentationContainer.webkitRequestFullscreen) {
+          presentationContainer.webkitRequestFullscreen();
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    // 키보드 내비게이션
+    window.addEventListener('keydown', (e) => {
+      // 텍스트 입력창에서는 키보드 제어 방지
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown' || e.key === 'Enter') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'Backspace' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'n' || e.key === 'N' || e.key === 's' || e.key === 'S') {
+        e.preventDefault();
+        toggleNotes();
+      } else if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        toggleFullscreen();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        updateSlide(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        updateSlide(totalSlides - 1);
+      }
+    });
+
+    // 모바일 터치 스와이프 내비게이션
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    window.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    window.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleGesture();
+    }, { passive: true });
+
+    function handleGesture() {
+      const swipeDistance = touchEndX - touchStartX;
+      if (Math.abs(swipeDistance) > 50) {
+        if (swipeDistance < 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    }
+
+    // 초기화
+    updateSlide(0);
+  </script>
+</body>
+
+</html>

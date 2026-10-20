@@ -1,0 +1,15 @@
+title: make-slide
+description: 11 presentation themes, 4 layouts, and an education theme for lectures and exams.
+theme: jekyll-theme-cayman
+url: https://edumediamon.github.io
+baseurl: /slides
+exclude:
+  - bin
+  - core
+  - tests
+  - package.json
+  - package-lock.json
+  - node_modules
+  - SKILL.md
+  - PLAN.md
+  - computer_literacy_education.html
