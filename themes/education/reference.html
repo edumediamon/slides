@@ -1,0 +1,2043 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Education — make-slide Reference (컴퓨터활용능력 2급 필기 핵심 특강)</title>
+  
+  <!-- Pretendard & JetBrains Mono Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap">
+  
+  <style>
+    /* ========================================================
+       THEME: EDUCATION (make-slide theme #11)
+       Clean White Canvas + Slate Stage + Interactive Educational Cards
+       ======================================================== */
+    :root {
+      --bg-body: #f8fafc;
+      --stage-bg: #f1f5f9;
+      --canvas-bg: #ffffff;
+      
+      /* Primary Blue Accent */
+      --accent-blue: #0284c7;
+      --accent-blue-light: #e0f2fe;
+      --accent-blue-border: #bae6fd;
+      
+      /* Emerald Success Accent */
+      --accent-emerald: #059669;
+      --accent-emerald-light: #d1fae5;
+      --accent-emerald-border: #86efac;
+      --text-emerald: #15803d;
+      
+      /* Amber Notice Accent */
+      --accent-amber: #d97706;
+      --accent-amber-light: #fef3c7;
+      
+      /* Rose Warning/Trap Accent */
+      --accent-rose: #e11d48;
+      --accent-rose-light: #ffe4e6;
+      --text-rose: #dc2626;
+      
+      /* Purple Category Accent */
+      --accent-purple: #7c3aed;
+      --accent-purple-light: #ede9fe;
+      
+      /* Base Surface & Text */
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-sub: #334155;
+      --text-muted: #64748b;
+      
+      /* Shadows */
+      --shadow-canvas: 0 20px 40px -15px rgba(15, 23, 42, 0.08), 0 0 1px 1px rgba(15, 23, 42, 0.05);
+      --shadow-card: 0 4px 12px -2px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.05);
+      --shadow-card-hover: 0 10px 25px -5px rgba(2, 132, 199, 0.12), 0 4px 10px rgba(0, 0, 0, 0.04);
+      
+      /* Typography */
+      --font-body: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --font-code: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: var(--font-body);
+      background: var(--bg-body);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* 상단 프로그레스 바 */
+    .progress-bar-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(226, 232, 240, 0.6);
+      z-index: 100;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-blue) 0%, var(--accent-emerald) 100%);
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* 초록색 핵심 형광 하이라이트 */
+    .hl-green,
+    u,
+    .u-highlight {
+      text-decoration: none;
+      background-color: #dcfce7 !important;
+      color: #15803d !important;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 800;
+      border-bottom: 2.5px solid #22c55e;
+      box-shadow: 0 1px 2px rgba(34, 197, 94, 0.12);
+      display: inline-block;
+    }
+
+    code,
+    .code {
+      font-family: var(--font-code);
+      font-weight: 700;
+    }
+
+    .presentation-container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      background: var(--stage-bg);
+      overflow: hidden;
+    }
+
+    /* Top Bar */
+    .header-bar {
+      height: 54px;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #e2e8f0;
+      background: #ffffff;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+      z-index: 20;
+    }
+
+    .badge-subject {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 14px;
+      border-radius: 9999px;
+      background: var(--accent-blue-light);
+      border: 1px solid var(--accent-blue-border);
+      color: var(--accent-blue);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .header-center {
+      font-size: 14px;
+      font-weight: 700;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ctrl-btn {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      color: #334155;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .ctrl-btn:hover {
+      background: var(--accent-blue);
+      color: #ffffff;
+      border-color: var(--accent-blue);
+    }
+
+    .slide-counter {
+      font-family: var(--font-code);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: #f1f5f9;
+      padding: 4px 12px;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Slide Stage Canvas */
+    .slide-stage {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 36px 8px 36px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Floating Navigation Arrows */
+    .side-nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid #cbd5e1;
+      color: #334155;
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 30;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+      user-select: none;
+    }
+
+    .side-nav-arrow:hover {
+      background: var(--accent-blue);
+      color: #ffffff;
+      border-color: var(--accent-blue);
+      transform: translateY(-50%) scale(1.08);
+      box-shadow: 0 8px 24px rgba(2, 132, 199, 0.25);
+    }
+
+    .side-nav-arrow:active {
+      transform: translateY(-50%) scale(0.96);
+    }
+
+    .side-nav-arrow.prev {
+      left: 14px;
+    }
+
+    .side-nav-arrow.next {
+      right: 14px;
+    }
+
+    .slide-canvas {
+      width: 100%;
+      height: 100%;
+      max-width: 1320px;
+      max-height: 720px;
+      background: var(--canvas-bg);
+      border-radius: 20px;
+      box-shadow: var(--shadow-canvas);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      padding: 32px 42px;
+    }
+
+    /* Slide Component Structure */
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 32px 42px;
+      display: none;
+      flex-direction: column;
+      background: #ffffff;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .slide.active {
+      display: flex;
+      opacity: 1;
+      pointer-events: auto;
+      animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.995);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* 50:50 좌우 분할 컨테이너 */
+    .split-container {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 32px;
+      height: 100%;
+      align-items: center;
+    }
+
+    .left-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+      height: 100%;
+    }
+
+    .right-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      position: relative;
+    }
+
+    .anim-left {
+      animation: animLeft 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .anim-right {
+      animation: animRight 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes animLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes animRight {
+      from {
+        opacity: 0;
+        transform: translateX(20px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* 슬라이드 태그 (오버라인) */
+    .slide-tag {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .slide-tag::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 24px;
+      background: var(--accent-blue);
+      border-radius: 4px;
+    }
+
+    /* 슬라이드 제목 */
+    .slide-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    /* 정보 카드 (좌측 칼럼) */
+    .info-card {
+      background: #ffffff;
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 16px 20px;
+      box-shadow: var(--shadow-card);
+      border-left: 5px solid var(--accent-blue);
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .info-card.warning {
+      border-left-color: var(--accent-rose);
+      background: #fffbfa;
+    }
+
+    .info-card.success {
+      border-left-color: var(--accent-emerald);
+      background: #fbfdfc;
+    }
+
+    .info-card.amber {
+      border-left-color: var(--accent-amber);
+      background: #fffdfa;
+    }
+
+    .info-card.purple {
+      border-left-color: var(--accent-purple);
+      background: #fbfaff;
+    }
+
+    .card-title {
+      font-size: 19px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .info-card.warning .card-title {
+      color: var(--accent-rose);
+    }
+
+    .info-card.success .card-title {
+      color: var(--accent-emerald);
+    }
+
+    .info-card.amber .card-title {
+      color: var(--accent-amber);
+    }
+
+    .info-card.purple .card-title {
+      color: var(--accent-purple);
+    }
+
+    .card-desc {
+      font-size: 15.5px;
+      line-height: 1.6;
+      color: #334155;
+    }
+
+    .card-desc strong {
+      color: #0369a1;
+      font-weight: 700;
+    }
+
+    .card-desc .warn-text {
+      color: #e11d48;
+      font-weight: 800;
+      background: #fff1f2;
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    /* Key Badge 단축키 키캡 */
+    .key-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      font-family: var(--font-code);
+      font-size: 13.5px;
+      color: #0f172a;
+      font-weight: 800;
+      box-shadow: 0 2px 0 #94a3b8;
+      vertical-align: baseline;
+      margin: 0 2px;
+    }
+
+    .win-key {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      background-color: #0078d4;
+      vertical-align: -2px;
+      mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'><path fill='black' d='M0 2.247l6.545-.898v6.082H0V2.247zm0 6.643h6.545v6.082L0 14.074V8.89zM7.455 1.225L16 0v7.431H7.455V1.225zm8.545 7.665V16l-8.545-1.225V8.89H16z'/></svg>") no-repeat center;
+      -webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'><path fill='black' d='M0 2.247l6.545-.898v6.082H0V2.247zm0 6.643h6.545v6.082L0 14.074V8.89zM7.455 1.225L16 0v7.431H7.455V1.225zm8.545 7.665V16l-8.545-1.225V8.89H16z'/></svg>") no-repeat center;
+    }
+
+    /* 우측 시각화/인터랙션 카드 */
+    .morph-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      box-shadow: var(--shadow-card);
+      padding: 22px;
+      width: 100%;
+      max-width: 530px;
+      position: relative;
+    }
+
+    .morph-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px dashed #e2e8f0;
+      padding-bottom: 10px;
+    }
+
+    .morph-btn {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      color: #334155;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      font-family: inherit;
+    }
+
+    .morph-btn:hover {
+      background: var(--accent-blue);
+      color: #ffffff;
+      border-color: var(--accent-blue);
+      transform: scale(1.02);
+    }
+
+    .morph-btn.active {
+      background: var(--accent-blue);
+      color: #ffffff;
+      border-color: var(--accent-blue);
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+    }
+
+    /* 스타일 테이블 */
+    .styled-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 13.5px;
+    }
+
+    .styled-table th,
+    .styled-table td {
+      border: 1px solid #e2e8f0;
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    .styled-table th {
+      background: #f8fafc;
+      font-weight: 800;
+      color: #334155;
+      text-align: center;
+    }
+
+    .styled-table td.center {
+      text-align: center;
+    }
+
+    /* 그리드 셀 (엑셀/체크포인트) */
+    .excel-morph-grid {
+      display: grid;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .e-cell {
+      padding: 8px 10px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+    }
+
+    .e-cell.header {
+      background: #f1f5f9;
+      font-weight: 800;
+      color: #475569;
+      justify-content: center;
+    }
+
+    .e-cell.active-green {
+      background: #dcfce7;
+      color: #15803d;
+      border-color: #86efac;
+      font-weight: 800;
+    }
+
+    /* 3D 플립 카드 */
+    .flip-container {
+      perspective: 1000px;
+      width: 100%;
+      height: 125px;
+      cursor: pointer;
+    }
+
+    .flipper {
+      transition: 0.5s transform cubic-bezier(0.16, 1, 0.3, 1);
+      transform-style: preserve-3d;
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .flip-container.flipped .flipper {
+      transform: rotateY(180deg);
+    }
+
+    .flip-front,
+    .flip-back {
+      backface-visibility: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 14px;
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border: 1.5px solid #e2e8f0;
+      box-shadow: var(--shadow-card);
+    }
+
+    .flip-front {
+      background: #ffffff;
+      z-index: 2;
+      border-left: 5px solid #0284c7;
+    }
+
+    .flip-back {
+      transform: rotateY(180deg);
+      background: #f0fdf4;
+      border: 1.5px solid #86efac;
+      border-left: 5px solid #22c55e;
+    }
+
+    /* Title Slide Specifics */
+    .title-h1 {
+      font-size: 48px;
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1.25;
+      margin-bottom: 16px;
+      letter-spacing: -0.03em;
+      text-align: center;
+    }
+
+    .title-h1 span {
+      background: linear-gradient(135deg, #0284c7 0%, #059669 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .title-sub {
+      font-size: 19px;
+      color: #475569;
+      font-weight: 600;
+      text-align: center;
+      max-width: 860px;
+      line-height: 1.6;
+      margin: 0 auto;
+    }
+
+    .title-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 18px;
+      border-radius: 9999px;
+      background: #e0f2fe;
+      color: #0284c7;
+      font-size: 14.5px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      border: 1px solid #bae6fd;
+    }
+
+    /* 하단 키보드 단축키 안내 바 */
+    .key-shortcuts-bar {
+      height: 34px;
+      background: #ffffff;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      font-size: 12px;
+      color: #64748b;
+      user-select: none;
+    }
+
+    .key-shortcuts-bar kbd {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+      color: #334155;
+      font-family: var(--font-code);
+    }
+
+    /* 발표자 강의 대본창 (Speaker Notes Drawer) */
+    .speaker-notes-drawer {
+      position: absolute;
+      bottom: 34px;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(10px);
+      border-top: 2.5px solid var(--accent-emerald);
+      box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.08);
+      z-index: 40;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(100%);
+      max-height: 195px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .speaker-notes-drawer.open {
+      transform: translateY(0);
+    }
+
+    .notes-header {
+      padding: 8px 24px;
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+    }
+
+    .notes-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #059669;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .notes-content {
+      padding: 14px 28px;
+      overflow-y: auto;
+      font-size: 14.5px;
+      line-height: 1.65;
+      color: #1e293b;
+      font-weight: 500;
+    }
+
+    .notes-content strong {
+      color: #0284c7;
+      font-weight: 800;
+    }
+
+    .notes-content mark {
+      background: #dcfce7;
+      color: #15803d;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    /* PDF Print Optimization */
+    @media print {
+      body {
+        overflow: visible !important;
+        background: #ffffff !important;
+      }
+      .presentation-container {
+        width: 100% !important;
+        height: auto !important;
+        background: #ffffff !important;
+      }
+      .progress-bar-container,
+      .header-bar,
+      .side-nav-arrow,
+      .speaker-notes-drawer,
+      .key-shortcuts-bar,
+      .morph-btn,
+      button {
+        display: none !important;
+      }
+      .slide-stage {
+        padding: 0 !important;
+        display: block !important;
+      }
+      .slide-canvas {
+        max-width: 100% !important;
+        max-height: 100% !important;
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+      }
+      .slide {
+        position: relative !important;
+        display: flex !important;
+        opacity: 1 !important;
+        page-break-after: always;
+        break-after: page;
+        width: 100vw !important;
+        height: 100vh !important;
+        padding: 40px !important;
+      }
+      @page {
+        size: landscape;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="presentation-container" id="presentationContainer">
+    <!-- 상단 프로그레스 바 -->
+    <div class="progress-bar-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- 상단 헤더 바 -->
+    <header class="header-bar">
+      <div class="badge-subject">
+        <span>📘</span>
+        <span>컴활 2급 필기 • 1과목 컴퓨터 일반</span>
+      </div>
+      <div class="header-center">
+        <span>21. 관리 도구 ~ 28. 컴퓨터 분류 핵심 요약</span>
+      </div>
+      <div class="header-controls">
+        <button class="ctrl-btn" onclick="toggleNotes()" title="단축키 N 또는 S">
+          🎙️ 발표자 대본 (N)
+        </button>
+        <button class="ctrl-btn" onclick="toggleFullscreen()" title="단축키 F">
+          ⛶ 전체화면 (F)
+        </button>
+        <div class="slide-counter"><span id="curSlideNum">01</span> / <span id="totalSlideNum">16</span></div>
+      </div>
+    </header>
+
+    <!-- 슬라이드 메인 무대 -->
+    <main class="slide-stage">
+      <button class="side-nav-arrow prev" onclick="prevSlide()" title="이전 슬라이드 (◀ / Backspace)">‹</button>
+      <button class="side-nav-arrow next" onclick="nextSlide()" title="다음 슬라이드 (▶ / Space / Enter)">›</button>
+
+      <div class="slide-canvas" id="slideCanvas">
+
+        <!-- ========================================================
+             SLIDE 1 : Title Slide
+             ======================================================== -->
+        <section class="slide active"
+          data-notes="안녕하십니까. 컴퓨터활용능력 2급 필기 1과목 컴퓨터 일반 4페이지 핵심 특강입니다. 이번 21단원부터 28단원까지는 관리 도구의 디스크 파티션 관리, 작업 관리자의 프로세스 제어 한계, 레지스트리 regedit 실행, TCP/IP 4대 구성 요소와 네트워크 DOS 명령어 Ping·Ipconfig·Tracert, 컴퓨터 발전사 5개 세대와 디지털 vs 아날로그 컴퓨터 비교까지 시험에 반드시 3~4문제가 출제되는 핵심 파트입니다. 총 16장의 고품질 슬라이드로 완벽 정리해 드리겠습니다.">
+          <div style="margin: auto; text-align: center; max-width: 900px;">
+            <div class="title-badge">2027 최신개정 핵심요약</div>
+            <h1 class="title-h1"><span>컴퓨터활용능력 2급 필기</span><br>1과목 컴퓨터 일반</h1>
+            <p class="title-sub">관리 도구/작업 관리자 • 레지스트리 • TCP/IP & DOS 명령어 • 컴퓨터 발전 세대 • 디지털 vs 아날로그 분류</p>
+            <div style="margin-top: 28px; display: flex; gap: 12px; justify-content: center; align-items: center;">
+              <button onclick="nextSlide()"
+                style="background:#0284c7; color:#fff; border:none; padding:12px 28px; border-radius:10px; font-weight:800; cursor:pointer; font-size:16px; box-shadow:0 4px 14px rgba(2,132,199,0.35); transition:all 0.2s;"
+                onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                강의 시작하기 ▶
+              </button>
+              <button onclick="goTo(2)"
+                style="background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; padding:12px 20px; border-radius:10px; font-weight:700; cursor:pointer; font-size:15px; transition:all 0.2s;"
+                onmouseover="this.style.background='#e2e8f0'" onmouseout="this.style.background='#f1f5f9'">
+                목차 바로가기 📑
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             SLIDE 2 : Table of Contents (Agenda & Roadmap)
+             ======================================================== -->
+        <section class="slide"
+          data-notes="이번 회차 학습 로드맵입니다. 21 관리 도구와 22 작업 관리자의 핵심 기능 및 제어 불가 항목, 23 레지스트리, 24 네트워크 TCP/IP 4대 요소, 25 네트워크 DOS 명령어 3총사, 26 컴퓨터 개념과 27 발전 5개 세대, 28 디지털과 아날로그 컴퓨터 비교 매트릭스 순으로 학습합니다.">
+          <div class="split-container">
+            <div class="left-col anim-left">
+              <div>
+                <div class="slide-tag">AGENDA & ROADMAP</div>
+                <h2 class="slide-title">핵심 학습 로드맵 (21~28)</h2>
+              </div>
+              <div class="info-card">
+                <div class="card-title">21. 관리 도구 & 22. 작업 관리자</div>
+                <div class="card-desc">디스크 파티션 관리, 작업 관리자 단축키(Ctrl+Shift+Esc), 프로세스 제어 한계</div>
+              </div>
+              <div class="info-card warning">
+                <div class="card-title">23. 레지스트리 & 24~25. 네트워크 DOS</div>
+                <div class="card-desc">regedit 실행, TCP/IP 4대 요소, Ping(연결) • Ipconfig(정보) • Tracert(경로)</div>
+              </div>
+              <div class="info-card success">
+                <div class="card-title">26. 컴퓨터 개념 & 27. 컴퓨터 발전 5세대</div>
+                <div class="card-desc">Data➔Program➔Info, 에니악/에드삭/에드박, 1세대(일괄)부터 5세대(AI) 주요 소자</div>
+              </div>
+              <div class="info-card purple">
+                <div class="card-title">28. 디지털 vs 아날로그 컴퓨터 (★출제 1위)</div>
+                <div class="card-desc">데이터 형태, 회로, 연산, 속도, 정밀도, 기억장치 유무 완벽 비교표</div>
+              </div>
+            </div>
+            <div class="right-col anim-right">
+              <div class="morph-card" style="padding: 20px; width: 100%;">
+                <div style="font-size: 15px; font-weight: 800; color: #0284c7; margin-bottom: 14px;">
+                  ⚡ 원하는 토픽으로 즉시 이동 (Click Jump)
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                  <button class="morph-btn" onclick="goTo(3)">21. 디스크 관리 도구</button>
+                  <button class="morph-btn" onclick="goTo(4)">22. 작업 관리자 & 한계</button>
+                  <button class="morph-btn" onclick="goTo(5)">23. 레지스트리 (regedit)</button>
+                  <button class="morph-btn" onclick="goTo(6)">24. 네트워크 & TCP/IP</button>
+                  <button class="morph-btn" onclick="goTo(7)">25. 네트워크 DOS 3대 명령</button>
+                  <button class="morph-btn" onclick="goTo(8)">26. 컴퓨터 개념 & 5대기능</button>
+                  <button class="morph-btn" onclick="goTo(9)">27. 전자계산기 & 5대 세대</button>
+                  <button class="morph-btn" onclick="goTo(10)">28. 디지털 vs 아날로그</button>
+                  <button class="morph-btn" onclick="goTo(11)">28. 컴퓨터 목적/규모 분류</button>
+                  <button class="morph-btn" onclick="goTo(12)">🎯 킬러 함정 플립 ①</button>
+                  <button class="morph-btn" onclick="goTo(13)">🎯 킬러 함정 플립 ②</button>
+                  <button class="morph-btn" onclick="goTo(14)">10대 공식 총정리 매트릭스</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             SLIDE 3 : 21 관리 도구 & 디스크 관리 (Concept & Split)
+             ======================================================== -->
+        <section class="slide"
+          data-notes="21번 관리 도구입니다. 관리 도구는 시스템과 하드웨어, 네트워크 설정을 종합적으로 관리하는 Windows 기능입니다. 그중 시험에 가장 자주 나오는 것은 [컴퓨터 관리] 속 [저장소]-[디스크 관리]입니다. 디스크 관리에서는 물리적인 하나의 하드디스크를 여러 개의 논리적인 구역으로 나누는 파티션(Partition) 작업을 수행할 수 있습니다. 또한 새 볼륨 생성, 기존 볼륨의 확장이나 축소, 그리고 C나 D 드라이브 같은 드라이브 문자 할당 및 변경을 수행할 수 있습니다.">
+          <div class="split-container">
+            <div class="left-col anim-left">
+              <div>
+                <div class="slide-tag">TOPIC 21 • 관리 도구 (ADMIN TOOLS)</div>
+                <h2 class="slide-title">디스크 파티션 관리 & <span class="hl-green">볼륨 설정</span></h2>
+              </div>
+              <div class="info-card">
+                <div class="card-title">1. Windows 관리 도구의 개요</div>
+                <div class="card-desc">
+                  • 시스템, 하드웨어, 스토리지, 이벤트 로그 등 고급 시스템 설정을 직접 제어하는 관리 콘솔
+                </div>
+              </div>
+              <div class="info-card success">
+                <div class="card-title">2. 디스크 관리 (Disk Management) 핵심 기능 ★</div>
+                <div class="card-desc">
+                  • 경로: [컴퓨터 관리] ➔ [저장소] ➔ [디스크 관리]<br>
+                  • 하나의 하드디스크를 여러 논리 드라이브로 분할하는 <span class="hl-green">디스크 파티션(Partition) 관리</span><br>
+                  • 새 볼륨 생성, 볼륨 확장 및 축소<br>
+                  • <span class="hl-green">드라이브 문자(C:, D:) 변경</span> 및 포맷 수행
+                </div>
+              </div>
+            </div>
+            <div class="right-col anim-right">
+              <div class="morph-card">
+                <div class="morph-title">
+                  <span>💾 디스크 관리 파티션 작업 시뮬레이터</span>
+                </div>
+                <table class="styled-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 32%;">작업 항목</th>
+                      <th>수행 가능한 작업 내용</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="font-weight:700;">파티션 분할</td>
+                      <td>하나의 물리 디스크를 C: 와 D: 로 논리적 분할</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight:700;">볼륨 축소/확장</td>
+                      <td>남는 여유 공간을 줄여 새 드라이브 생성 or 합치기</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight:700;">드라이브 문자</td>
+                      <td>D: ➔ E: 등 원하는 드라이브 문자 재할당</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight:700;">파일 시스템 포맷</td>
+                      <td>NTFS, exFAT 등으로 포맷 및 볼륨 라벨 설정</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div
+                  style="font-size: 13.5px; color: #15803d; background: #f0fdf4; padding: 10px; border-radius: 8px; border: 1px solid #86efac; margin-top: 14px;">
+                  💡 <strong>기출 지문 정답</strong>: "디스크의 파티션 생성, 볼륨 확장·축소, 드라이브 문자 변경은 [디스크 관리]에서 수행한다."
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             SLIDE 4 : 22 작업 관리자 (Warning & Trap)
+             ======================================================== -->
+        <section class="slide"
+          data-notes="22번 작업 관리자입니다. 단축키 Ctrl+Shift+Esc는 반드시 외우셔야 합니다. 작업 관리자에서는 현재 실행 중인 프로그램과 백그라운드 프로세스를 확인하고, 응답이 없는 프로그램을 강제 종료하거나 컴퓨터를 다시 시작할 수 있습니다. 또한 CPU, 메모리, 디스크, 네트워크의 실시간 사용률을 모니터링하고 시작 프로그램을 제어할 수 있습니다. 여기서 시험에 100% 출제되는 오답 함정 2가지가 있습니다. 첫째, 작업 관리자에서는 실행 중인 앱의 실행 순서를 변경할 수 없습니다! 둘째, 하드디스크의 전체 용량이나 남은 공간 크기는 확인할 수 없습니다! 용량 확인은 파일 탐색기나 디스크 관리에서 해야 합니다.">
+          <div class="split-container">
+            <div class="left-col anim-left">
+              <div>
+                <div class="slide-tag">TOPIC 22 • 작업 관리자 (TASK MANAGER) ★</div>
+                <h2 class="slide-title">시스템 제어 & <span class="hl-green">수행 불가 오답 함정</span></h2>
+              </div>
+              <div class="info-card">
+                <div class="card-title">1. 작업 관리자 실행 단축키 & 주요 기능</div>
+                <div class="card-desc">
+                  • 단축키: <span class="key-badge">Ctrl</span> + <span class="key-badge">Shift</span> + <span
+                    class="key-badge">Esc</span><br>
+                  • 실행 중인 응용 프로그램 및 프로세스 확인<br>
+                  • 응답 없는 <span class="hl-green">프로그램 강제 종료</span>, 시스템 종료/재시작 제어<br>
+                  • CPU, 메모리, 디스크, 네트워크 성능 실시간 모니터링
+                </div>
+              </div>
+              <div class="info-card warning">
+                <div class="card-title">2. 시험 출제 1순위: 작업 관리자에서 '할 수 없는 것' ★</div>
+                <div class="card-desc">
+                  • <span class="warn-text">1. 실행 중인 앱의 실행 순서 변경 불가!</span><br>
+                  • <span class="warn-text">2. 드라이브의 전체/여유 용량 확인 불가!</span> (디스크 점유율 %만 표시)
+                </div>
+              </div>
+            </div>
+            <div class="right-col anim-right">
+              <div class="morph-card">
+                <div class="morph-title">
+                  <span>📊 작업 관리자 기능 O / X 판별표</span>
+                </div>
+                <table class="styled-table">
+                  <thead>
+                    <tr>
+                      <th>기능 항목</th>
+                      <th style="width: 25%; text-align:center;">가능 여부</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>응답 없는 프로그램 강제 종료 (작업 끝내기)</td>
+                      <td class="center" style="color:#059669; font-weight:800;">O (가능)</td>
+                    </tr>
+                    <tr>
+                      <td>CPU, RAM, GPU 리소스 사용량 모니터링</td>
+                      <td class="center" style="color:#059669; font-weight:800;">O (가능)</td>
+                    </tr>
+                    <tr>
+                      <td>부팅 시 자동 실행되는 시작 앱 켜기/끄기</td>
+                      <td class="center" style="color:#059669; font-weight:800;">O (가능)</td>
+                    </tr>
+                    <tr style="background:#fef2f2;">
+                      <td style="font-weight:800; color:#dc2626;">실행 중인 앱들의 우선순위/실행 순서 변경</td>
+                      <td class="center" style="color:#dc2626; font-weight:900;">X (불가 ★)</td>
+                    </tr>
+                    <tr style="background:#fef2f2;">
+                      <td style="font-weight:800; color:#dc2626;">하드디스크 드라이브 전체/잔여 저장 용량 확인</td>
+                      <td class="center" style="color:#dc2626; font-weight:900;">X (불가 ★)</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div
+                  style="font-size: 13.5px; color: #b91c1c; background: #fef2f2; padding: 10px; border-radius: 8px; border: 1px solid #fecaca; margin-top: 14px;">
+                  ⚠️ <strong>기출 오답 함정</strong>: "작업 관리자에서 실행 중인 앱의 실행 순서를 변경하거나 하드디스크의 여유 용량을 확인한다" ➔ <span
+                    style="font-weight:900;">무조건 오답!</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             SLIDE 5 : 23 레지스트리 (Command & System Tree)
+             ======================================================== -->
+        <section class="slide"
+          data-notes="23번 레지스트리입니다. 레지스트리는 컴퓨터에 설치된 모든 하드웨어와 소프트웨어의 설정 정보 및 실행 환경 정보를 한군데 모아서 계층적인 트리 구조로 관리하는 데이터베이스입니다. 레지스트리를 직접 열어서 편집할 때 사용하는 명령어는 영문 소문자로 regedit입니다. 실행 창 단축키인 Win+R을 누르고 regedit을 입력한 후 엔터를 치면 레지스트리 편집기가 실행됩니다. 레지스트리가 손상되면 윈도우 부팅 자체가 되지 않을 수 있으므로 백업이 필수적입니다.">
+          <div class="split-container">
+            <div class="left-col anim-left">
+              <div>
+                <div class="slide-tag">TOPIC 23 • 레지스트리 (REGISTRY)</div>
+                <h2 class="slide-title">시스템 통합 DB & <span class="hl-green">regedit 편집기</span></h2>
+              </div>
+              <div class="info-card">
+                <div class="card-title">1. 레지스트리의 정의 (암기 필수)</div>
+                <div class="card-desc">
+                  • 컴퓨터에 설치된 <span class="hl-green">모든 하드웨어와 소프트웨어의 실행 정보를 한곳에 모아 관리</span>하는 계층적 데이터베이스<br>
+                  • 사용자 프로필, 설치된 앱, 드라이버 설정 등 전반적인 환경 정보 수록
+                </div>
+              </div>
+              <div class="info-card success">
+                <div class="card-title">2. 레지스트리 편집기 실행 방법</div>
+                <div class="card-desc">
+                  • 단축키: <span class="key-badge"><span class="win-key"></span></span> + <span class="key-badge">R</span>
+                  (실행 창 호출)<br>
+                  • 명령어 입력: <span class="hl-green"><code>regedit</code></span> 입력 후 <span class="key-badge">Enter ↵</span>
+                </div>
+              </div>
+              <div class="info-card warning">
+                <div class="card-title">3. 주의 사항</div>
+                <div class="card-desc">
+                  • 레지스트리 수정 오류 시 시스템 부팅 불가 등 치명적 손상이 발생할 수 있으므로 사전에 <span class="warn-text">백업(내보내기) 권장</span>
+                </div>
+              </div>
+            </div>
+            <div class="right-col anim-right">
+              <div class="morph-card">
+                <div class="morph-title">
+                  <span>🗄️ 레지스트리 계층 구조 시뮬레이터</span>
+                </div>
+                <div
+                  style="font-family:'JetBrains Mono', monospace; font-size:13px; line-height:1.7; background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:14px; margin-top:12px;">
+                  📁 컴퓨터 (Computer)<br>
+                  &nbsp;&nbsp;├─ 📂 HKEY_CLASSES_ROOT (파일 확장자 연결 정보)<br>
+                  &nbsp;&nbsp;├─ 📂 HKEY_CURRENT_USER (현재 로그인한 사용자 환경)<br>
+                  &nbsp;&nbsp;├─ 📂 <span style="color:#0284c7; font-weight:800;">HKEY_LOCAL_MACHINE</span> (하드웨어/소프트웨어 전체 정보)<br>
+                  &nbsp;&nbsp;├─ 📂 HKEY_USERS (시스템의 모든 사용자 계정 프로필)<br>
+                  &nbsp;&nbsp;└─ 📂 HKEY_CURRENT_CONFIG (현재 디스플레이/하드웨어 구성)
+                </div>
+                <div
+                  style="font-size: 13.5px; color: #15803d; background: #f0fdf4; padding: 10px; border-radius: 8px; border: 1px solid #86efac; margin-top: 14px;">
+                  💡 <strong>기출 지문 정답</strong>: "컴퓨터 하드웨어와 소프트웨어의 실행 정보를 보관하는 계층적 데이터베이스 편집 명령어는 <strong>regedit</strong>이다."
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             SLIDE 6 : 24 네트워크 & TCP/IP 4대 요소 (Data & Protocol)
+             ======================================================== -->
+        <section class="slide"
+          data-notes="24번 네트워크와 TCP/IP 설정입니다. 컴퓨터가 인터넷 통신을 하기 위해 네트워크 어댑터에 설정해야 하는 필수 구성 요소 4가지는 IP 주소, 서브넷 마스크, 기본 게이트웨이, 그리고 DNS 서버 주소입니다. 이 4가지를 반드시 기억하세요. IPv4에서는 IP주소, 서브넷마스크, 기본 게이트웨이, DNS 서버로 구성되고, IPv6에서는 IPv6 주소, 서브넷 접두사 길이, 기본 게이트웨이, DNS 서버로 구성됩니다. 그리고 IP 주소를 수동으로 입력하지 않고 공유기나 서버로부터 자동으로 받아오는 프로토콜을 DHCP라고 하며, 동적인 IP 주소를 할당해 줍니다.">
+          <div class="split-container">
+            <div class="left-col anim-left">
+              <div>
+                <div class="slide-tag">TOPIC 24 • 네트워크 (NETWORK)</div>
+                <h2 class="slide-title">TCP/IP 4대 요소 & <span class="hl-green">DHCP 동적 할당</span></h2>
+              </div>
+              <div class="info-card">
+                <div class="card-title">1. TCP/IP 필수 4대 구성 요소 ★</div>
+                <div class="card-desc">
+                  • <span class="hl-green">1. IP 주소</span>: 네트워크 상에서 내 컴퓨터를 식별하는 고유 주소<br>
+                  • <span class="hl-green">2. 서브넷 마스크</span>: 네트워크 ID와 호스트 ID를 구분하는 마스크<br>
+                  • <span class="hl-green">3. 기본 게이트웨이</span>: 다른 네트워크(외부 인터넷)로 나가는 출입문 라우터<br>
+                  • <span class="hl-green">4. DNS 서버 주소</span>: 문자 도메인 이름을 숫자 IP 주소로 변환
+                </div>
+              </div>
+              <div class="info-card success">
+                <div class="card-title">2. DHCP (동적 호스트 구성 프로토콜)</div>
+                <div class="card-desc">
+                  • IP 주소를 수동 입력하지 않고 <span class="hl-green">자동으로 동적 IP 주소를 할당</span>받는 프로토콜
+                </div>
+              </div>
+            </div>
+            <div class="right-col anim-right">
+              <div class="morph-card">
+                <div class="morph-title">
+                  <span>🌐 TCP/IP IPv4 속성 대화상자 매핑</span>
+                </div>
+                <table class="styled-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 32%;">설정 항목</th>
+                      <th>실제 설정 예시 및 역할</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="font-weight:700;">IP 주소</td>
+                      <td><code>192.168.0.15</code> (단말 식별 주소)</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight:700;">서브넷 마스크</td>
+                      <td><code>255.255.255.0</code> (네트워크 분할 규격)</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight:700;">기본 게이트웨이</td>
+                      <td><code>192.168.0.1</code> (외부 인터넷 관문)</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight:700;">기본 DNS 서버</td>
+                      <td><code>168.126.63.1</code> (도메인 ➔ IP 변환)</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div
+                  style="font-size: 13.5px; color: #15803d; background: #f0fdf4; padding: 10px; border-radius: 8px; border: 1px solid #86efac; margin-top: 14px;">
+                  💡 <strong>기출 지문 정답</strong>: "인터넷에 정상 접속하기 위한 TCP/IP 4대 요소는 IP 주소, 서브넷 마스크, 기본 게이트웨이, DNS 서버 주소이다."
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             SLIDE 7 : 25 네트워크 DOS 명령어 (Comparison Matrix)
+             ======================================================== -->
+        <section class="slide"
+          data-notes="25번 네트워크 DOS 명령어 3총사입니다. 매 시험마다 1문제씩 출제되는 핵심 중의 핵심입니다. 첫째, Ping은 원격지 컴퓨터와의 네트워크 연결 상태를 점검하는 명령어로, 신호 손실률과 왕복 응답 시간을 확인합니다. 둘째, Ipconfig는 현재 내 컴퓨터에 할당된 네트워크 정보인 IP 주소, 서브넷 마스크, 게이트웨이, 물리적 MAC 주소를 확인하는 명령입니다. 셋째, Tracert는 내 컴퓨터에서 목적지 컴퓨터까지 패킷이 거쳐가는 라우팅 경로를 단계별로 추적하는 명령어입니다. 이 세 명령어의 역할을 뒤바꾼 오답이 매우 자주 출제됩니다.">
+          <div class="split-container">
+            <div class="left-col anim-left">
+              <div>
+                <div class="slide-tag">TOPIC 25 • DOS 명령어 ★최다 빈출</div>
+                <h2 class="slide-title">네트워크 진단 <span class="hl-green">3대 핵심 명령어</span></h2>
+              </div>
+              <div class="info-card">
+                <div class="card-title">1. Ping (연결 상태 & 응답 점검) ★</div>
+                <div class="card-desc">
+                  • <span class="hl-green">원격지 컴퓨터와의 네트워크 연결 상태 점검</span><br>
+                  • 원격지 IP/도메인, 전송 패킷의 <strong>손실률 및 응답 시간(ms)</strong> 표시
+                </div>
+              </div>
+              <div class="info-card success">
+                <div class="card-title">2. Ipconfig (현재 PC 네트워크 정보 확인) ★</div>
+                <div class="card-desc">
+                  • 현재 내 컴퓨터의 <span class="hl-green">IP 주소, 서브넷 마스크, 기본 게이트웨이, MAC 주소</span> 확인<br>
+                  • <code>ipconfig /all</code> 명령으로 모든 세부 네트워크 어댑터 정보 출력
+                </div>
+              </div>
+              <div class="info-card purple">
+                <div class="card-title">3. Tracert (경로 추적 라우팅) ★</div>
+                <div class="card-desc">
+                  • 목적지까지 패킷이 거쳐가는 <span class="hl-green">네트워크 경로(라우터) 추적</span>
+                </div>
+              </div>
+            </div>
+            <div class="right-col anim-right">
+              <div class="morph-card">
+                <div class="morph-title">
+                  <span>⚡ 네트워크 DOS 3대 명령어 완벽 비교</span>
+                </div>
+                <table class="styled-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 25%;">명령어</th>
+                      <th style="width: 32%;">핵심 키워드</th>
+                      <th>점검 대상 및 시험 정답</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="background:#f0fdf4;">
+                      <td style="font-weight:800; color:#15803d;">Ping</td>
+                      <td><strong>연결 상태 점검</strong></td>
+                      <td>원격지 패킷 전송 손실률 및 응답 시간 측정</td>
+                    </tr>
+                    <tr style="background:#e0f2fe;">
+                      <td style="font-weight:800; color:#0284c7;">Ipconfig</td>
+                      <td><strong>내 PC 정보 확인</strong></td>
+                      <td>IP 주소, 서브넷 마스크, 게이트웨이, MAC 확인</td>
+                    </tr>
+                    <tr style="background:#fdf4ff;">
+                      <td style="font-weight:800; color:#7c3aed;">Tracert</td>
+                      <td><strong>경로(라우팅) 추적</strong></td>
+                      <td>목적지 도달까지 거치는 경유 라우터 구간 추적</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div
+                  style="font-size: 13.5px; color: #15803d; background: #f0fdf4; padding: 10px; border-radius: 8px; border: 1px solid #86efac; margin-top: 14px;">
+                  💡 <strong>기출 지문 정답</strong>: "원격지 컴퓨터의 네트워크 연결 상태와 신호 손실률을 점검할 때 사용하는 명령어는 <strong>Ping</strong>이다."
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             SLIDE 8 : 26 컴퓨터 개념 & 5대 기능 (Concept & Principles)
+             ======================================================== -->
+        <section class="slide"
+          data-notes="26번 컴퓨터의 개념과 특징입니다. 컴퓨터는 단순한 계산기가 아니라, 외부로부터 원시 데이터인 자료(Data)를 입력받아, 메모리에 기억된 프로그램의 순서에 따라 처리하여, 사람이 유용하게 쓸 수 있는 가공된 정보(Information)로 변환해 주는 전자 정보 처리 시스템(EDPS)입니다. 컴퓨터의 6대 특징으로는 사람의 개입 없이 처리하는 자동성, 올바른 자료와 명령에 따라 정확히 처리하는 정확성, 매우 빠른 신속성, 기기간 호환성, 방대한 양을 다루는 대량성, 여러 분야에 쓰이는 범용성이 있습니다. 정확성과 함께 GIGO, 즉 Garbage In, Garbage Out을 기억하세요. 잘못된 자료를 입력하면 잘못된 결과가 나온다는 뜻입니다. 컴퓨터의 5대 핵심 기능은 입력, 제어, 저장, 연산, 출력 기능으로 구성됩니다.">
+          <div class="split-container">
+            <div class="left-col anim-left">
+              <div>
+                <div class="slide-tag">TOPIC 26 • 컴퓨터의 개념 (CONCEPT)</div>
+                <h2 class="slide-title">Data ➔ Information & <span class="hl-green">5대 핵심 기능</span></h2>
+              </div>
+              <div class="info-card">
+                <div class="card-title">1. 컴퓨터의 정의 (정보 처리 시스템)</div>
+                <div class="card-desc">
+                  • 자료(Data) 입력 ➔ 프로그램 명령어 처리 ➔ <span class="hl-green">정보(Information) 출력</span><br>
+                  • <strong>자료(Data)</strong>: 관찰/측정을 통해 얻은 가공되지 않은 순수 사실<br>
+                  • <strong>정보(Information)</strong>: 자료를 목적에 맞게 가공하여 의미를 부여한 결과물
+                </div>
+              </div>
+              <div class="info-card success">
+                <div class="card-title">2. 컴퓨터의 5대 장치</div>
+                <div class="card-desc">
+                  • <strong>입력 기능</strong>: 키보드, 마우스 등을 통해 데이터 입력<br>
+                  • <strong>제어 기능</strong>: 모든 장치의 동작을 지시하고 감독<br>
+                  • <strong>기억(저장) 기능</strong>: 주기억장치 및 보조기억장치에 데이터 보관<br>
+                  • <strong>연산 기능</strong>: 산술 연산(+,-,*,/) 및 논리 연산(AND, OR, NOT)<br>
+                  • <strong>출력 기능</strong>: 모니터, 프린터 등으로 처리 결과 표시
+                </div>
+              </div>
+            </div>
+            <div class="right-col anim-right">
+              <div class="morph-card">
+                <div class="morph-title">
+                  <span>⚙️ 컴퓨터의 6대 주요 특징</span>
+                </div>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-top:14px;">
+                  <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:10px; text-align:center;">
+                    <div style="font-weight:800; color:#0284c7;">자동성</div>
+                    <div style="font-size:11.5px; color:#64748b;">프로그램에 의해 자동 처리</div>
+                  </div>
+                  <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:10px; text-align:center;">
+                    <div style="font-weight:800; color:#0284c7;">정확성</div>
+                    <div style="font-size:11.5px; color:#64748b;">올바른 자료·명령에 따라 정확히 처리</div>
+                  </div>
+                  <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:10px; text-align:center;">
+                    <div style="font-weight:800; color:#0284c7;">신속성</div>
+                    <div style="font-size:11.5px; color:#64748b;">초고속 고성능 처리</div>
+                  </div>
+                  <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:10px; text-align:center;">
+                    <div style="font-weight:800; color:#0284c7;">호환성</div>
+                    <div style="font-size:11.5px; color:#64748b;">기기 및 데이터 상호 호환</div>
+                  </div>
+                  <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:10px; text-align:center;">
+                    <div style="font-weight:800; color:#0284c7;">대량성</div>
+                    <div style="font-size:11.5px; color:#64748b;">방대한 데이터 처리 및 저장</div>
+                  </div>
+                  <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:10px; text-align:center;">
+                    <div style="font-weight:800; color:#0284c7;">범용성</div>
+                    <div style="font-size:11.5px; color:#64748b;">다양한 응용 분야에 활용</div>
+                  </div>
+                </div>
+                <div
+                  style="font-size: 13.5px; text-align: center; line-height: 1.6; color: #0284c7; background: #f8fafc; padding: 12px; border-radius: 8px; border: 1px solid #e2e8f0; margin-top: 14px;">
+                  <div style="font-weight:800;">GIGO (Garbage In, Garbage Out)</div>
+                  <div style="font-size:11.5px; color:#64748b;">올바른 입력이 들어가야 올바른 출력이 도출됨</div>
+                </div>
+                <div
+                  style="font-size: 13.5px; color: #15803d; background: #f0fdf4; padding: 10px; border-radius: 8px; border: 1px solid #86efac; margin-top: 14px;">
+                  💡 <strong>포인트</strong>: 컴퓨터의 5대 장치는 입력, 출력, 기억, 연산, 제어 장치입니다.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             SLIDE 9 : 27 컴퓨터 발전사 & 5대 세대 (Evolution & Timeline)
+             ======================================================== -->
+        <section class="slide"
+          data-notes="27번 컴퓨터 발전 과정과 세대별 특징입니다. 초기 전자식 계산기 4대는 시험 단골입니다. 에니악(ENIAC)은 최초의 전자식 계산기이지만 프로그램 외장 방식이었습니다. 에드삭(EDSAC)은 최초로 프로그램 내장 방식을 도입했고, 유니박(UNIVAC-I)은 최초의 상업용 계산기입니다. 폰 노이만이 제안한 에드박(EDVAC)은 프로그램 내장 방식과 2진법 체계를 완성했습니다. 세대별로는 1세대 진공관(일괄처리), 2세대 트랜지스터(온라인 실시간), 3세대 집적회로 IC(시분할 처리), 4세대 고밀도 집적회로 LSI(분산처리), 5세대 초고밀도 집적회로 VLSI(인공지능, 퍼지이론, 전문가시스템, 음성인식)로 이어집니다.">
+          <div class="split-container">
+            <div class="left-col anim-left">
+              <div>
+                <div class="slide-tag">TOPIC 27 • 발전사 (HISTORY) ★</div>
+                <h2 class="slide-title">초기 계산기 & <span class="hl-green">세대별 특징 5단계</span></h2>
+              </div>
+              <div class="info-card">
+                <div class="card-title">1. 초기 전자식 계산기 4대 공식 ★</div>
+                <div class="card-desc">
+                  • <strong>에니악 (ENIAC)</strong>: 최초의 전자계산기, <span class="warn-text">외부 프로그램 방식</span><br>
+                  • <strong>에드삭 (EDSAC)</strong>: <span class="hl-green">최초의 프로그램 내장 방식</span> 도입<br>
+                  • <strong>유니박 (UNIVAC-I)</strong>: 최초의 상업용 전자계산기<br>
+                  • <strong>에드박 (EDVAC)</strong>: <span class="hl-green">폰 노이만, 프로그램 내장 방식 완성, 2진법 체계</span>
+                </div>
+              </div>
+              <div class="info-card success">
+                <div class="card-title">2. 세대별 주요 소자 및 처리 방식</div>
+                <div class="card-desc">
+                  • 1세대: <strong>진공관</strong> ➔ <span class="hl-green">일괄 처리</span><br>
+                  • 2세대: <strong>트랜지스터(TR)</strong> ➔ <span class="hl-green">온라인 실시간 처리</span><br>
+                  • 3세대: <strong>집적회로(IC)</strong> ➔ <span class="hl-green">시분할 처리 (TSS)</span><br>
+                  • 4세대: <strong>고밀도집적회로(LSI)</strong> ➔ <span class="hl-green">분산 처리 시스템</span><br>
+                  • 5세대: <strong>초고밀도(VLSI)</strong> ➔ <span class="hl-green">인공지능, 전문가시스템, 퍼지이론</span>
+                </div>
+              </div>
+            </div>
+            <div class="right-col anim-right">
+              <div class="morph-card">
+                <div class="morph-title">
+                  <span>🕰️ 컴퓨터 1~5세대 발전 요약 매트릭스</span>
+                </div>
+                <table class="styled-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 18%;">세대</th>
+                      <th style="width: 32%;">주요 소자</th>
+                      <th>대표 처리 방식 및 특징</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="center" style="font-weight:700;">1세대</td>
+                      <td>진공관</td>
+                      <td><span class="hl-green">일괄 처리 (Batch Processing)</span></td>
+                    </tr>
+                    <tr>
+                      <td class="center" style="font-weight:700;">2세대</td>
+                      <td>트랜지스터 (TR)</td>
+                      <td><span class="hl-green">온라인 실시간 처리 (Real-time)</span></td>
+                    </tr>
+                    <tr>
+                      <td class="center" style="font-weight:700;">3세대</td>
+                      <td>집적회로 (IC)</td>
+                      <td><span class="hl-green">시분할 처리 (TSS), 다중 프로그래밍</span></td>
+                    </tr>
+                    <tr>
+                      <td class="center" style="font-weight:700;">4세대</td>
+                      <td>고밀도 (LSI)</td>
+                      <td><span class="hl-green">분산 처리 시스템 (Distributed)</span></td>
+                    </tr>
+                    <tr style="background:#fdf4ff;">
+                      <td class="center" style="font-weight:800; color:#7c3aed;">5세대</td>
+                      <td>초고밀도 (VLSI)</td>
+                      <td><strong>인공지능(AI), 퍼지이론, 음성인식, DSS</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div
+                  style="font-size: 13.5px; color: #15803d; background: #f0fdf4; padding: 10px; border-radius: 8px; border: 1px solid #86efac; margin-top: 14px;">
+                  💡 <strong>기출 지문 정답</strong>: "3세대의 대표적 특징은 집적회로(IC)를 사용하고 시분할 처리(TSS)를 도입한 것이다."
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             SLIDE 10 : 28 디지털 vs 아날로그 컴퓨터 (Killer Comparison)
+             ======================================================== -->
+        <section class="slide"
+          data-notes="28번 디지털 컴퓨터와 아날로그 컴퓨터의 비교입니다. 컴활 1과목 전체에서 가장 정답률이 높으면서도 자주 나오는 핵심 비교표입니다. 디지털 컴퓨터는 숫자나 문자처럼 셀 수 있는 이산 데이터를 다루고, 논리 회로를 사용하며, 산술 및 논리 연산을 수행합니다. 연산 속도는 상대적으로 느리지만 필요한 한도까지 정밀도를 무한정 높일 수 있고, 기억장치와 프로그램이 필수적인 범용 컴퓨터입니다. 반면 아날로그 컴퓨터는 전류, 전압, 온도처럼 연속적인 물리량을 다루며, 증폭 회로를 써서 미적분 연산을 합니다. 속도는 대단히 빠르지만 정밀도는 0.01% 정도로 제한되며, 기억장치와 프로그램이 필요 없는 특수 목적용 컴퓨터입니다.">
+          <div class="split-container">
+            <div class="left-col anim-left">
+              <div>
+                <div class="slide-tag">TOPIC 28 • 컴퓨터 분류 ★최다 빈출</div>
+                <h2 class="slide-title">디지털 컴퓨터 vs <span class="hl-green">아날로그 컴퓨터</span></h2>
+              </div>
+              <div class="info-card">
+                <div class="card-title">1. 디지털 컴퓨터 (Digital) — 범용 PC</div>
+                <div class="card-desc">
+                  • <strong>취급 데이터</strong>: <span class="hl-green">셀 수 있는 이산 데이터 (숫자, 문자)</span><br>
+                  • <strong>회로 & 연산</strong>: 논리 회로 / <span class="hl-green">산술 및 논리 연산</span><br>
+                  • <strong>정밀도 & 속도</strong>: 필요한 한도까지 무제한 정밀 / 상대적 느림<br>
+                  • <strong>기억장치 & 프로그래밍</strong>: <span class="hl-green">반드시 필요함</span> / 범용성
+                </div>
+              </div>
+              <div class="info-card warning">
+                <div class="card-title">2. 아날로그 컴퓨터 (Analog) — 계측용</div>
+                <div class="card-desc">
+                  • <strong>취급 데이터</strong>: <span class="warn-text">연속적인 물리량 (전류, 온도, 속도)</span><br>
+                  • <strong>회로 & 연산</strong>: 증폭 회로 / <span class="warn-text">미적분 연산</span><br>
+                  • <strong>정밀도 & 속도</strong>: 제한적 정밀도(0.01%) / 연산 속도 빠름<br>
+                  • <strong>기억장치 & 프로그래밍</strong>: <span class="warn-text">필요 없음</span> / 특수 목적용
+                </div>
+              </div>
+            </div>
+            <div class="right-col anim-right">
+              <div class="morph-card">
+                <div class="morph-title">
+                  <span>⚖️ 디지털 vs 아날로그 완전 정복 비교표</span>
+                </div>
+                <table class="styled-table" style="font-size: 13px;">
+                  <thead>
+                    <tr>
+                      <th style="width: 25%;">비교 항목</th>
+                      <th style="width: 37%;">디지털 컴퓨터</th>
+                      <th style="width: 38%;">아날로그 컴퓨터</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="font-weight:700;">취급 데이터</td>
+                      <td><span class="hl-green">셀 수 있는 데이터(숫자/문자)</span></td>
+                      <td>연속적 물리량(전류/온도)</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight:700;">구성 회로</td>
+                      <td><span class="hl-green">논리 회로</span></td>
+                      <td>증폭 회로</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight:700;">주요 연산</td>
+                      <td><span class="hl-green">산술 및 논리 연산</span></td>
+                      <td>미적분 연산</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight:700;">연산 속도</td>
+                      <td>상대적으로 느림</td>
+                      <td><span class="hl-green">빠름</span></td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight:700;">정밀도</td>
+                      <td><span class="hl-green">필요한 한도까지 정밀</span></td>
+                      <td>제한적 (약 0.01%)</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight:700;">기억/프로그램</td>
+                      <td><span class="hl-green">필요함</span></td>
+                      <td>필요 없음</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div
+                  style="font-size: 13.5px; color: #15803d; background: #f0fdf4; padding: 10px; border-radius: 8px; border: 1px solid #86efac; margin-top: 14px;">
+                  💡 <strong>기출 지문 정답</strong>: "디지털 컴퓨터는 논리 회로를 사용하며 산술 및 논리 연산을 하고 필요한 한도까지 정밀도를 높일 수 있다."
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             SLIDE 11 : 28 목적 및 규모별 분류 (Category & Icon Grid)
+             ======================================================== -->
+        <section class="slide"
+          data-notes="28번의 하위 분류인 사용 목적과 규모에 따른 컴퓨터 분류입니다. 디지털과 아날로그의 장점만을 결합한 컴퓨터를 하이브리드(Hybrid) 컴퓨터라고 합니다. 사용 목적에 따라서는 특정 제어에만 쓰는 전용 컴퓨터와 다양한 용도로 쓰는 범용 컴퓨터가 있습니다. 컴퓨터의 규모와 성능에 따라서는 마이크로(개인용) 컴퓨터부터 워크스테이션, 미니(소형) 컴퓨터, 메인프레임(대형), 그리고 기상 예측이나 국방에 쓰이는 슈퍼 컴퓨터로 나뉩니다. 개인용 컴퓨터는 형태에 따라 데스크톱, 랩톱, 노트북, 손바닥 크기의 팜톱, 태블릿, 그리고 몸에 착용하는 웨어러블(Wearable) 컴퓨터로 분류됩니다.">
+          <div class="split-container">
+            <div class="left-col anim-left">
+              <div>
+                <div class="slide-tag">TOPIC 28 • 목적 & 규모 분류</div>
+                <h2 class="slide-title">하이브리드 & <span class="hl-green">휴대용 컴퓨터 형태</span></h2>
+              </div>
+              <div class="info-card">
+                <div class="card-title">1. 데이터 조합 및 사용 목적에 따른 분류</div>
+                <div class="card-desc">
+                  • <strong>하이브리드 컴퓨터</strong>: <span class="hl-green">디지털과 아날로그의 장점만을 결합</span>한 컴퓨터<br>
+                  • <strong>전용 컴퓨터</strong>: 특정 목적(군사, 제어 등)에 한정된 특수 목적용<br>
+                  • <strong>범용 컴퓨터</strong>: 다양한 분야에서 다목적으로 사용하는 컴퓨터
+                </div>
+              </div>
+              <div class="info-card success">
+                <div class="card-title">2. 규모 및 성능에 따른 분류</div>
+                <div class="card-desc">
+                  • 마이크로(개인용) ➔ 워크스테이션 ➔ 소형(미니) ➔ 메인프레임(대형) ➔ <span class="hl-green">슈퍼 컴퓨터</span>
+                </div>
+              </div>
+              <div class="info-card purple">
+                <div class="card-title">3. 개인용 컴퓨터의 휴대용 형태 분류</div>
+                <div class="card-desc">
+                  • 데스크톱, 랩톱(무릎), 노트북, 팜톱(손바닥), 태블릿PC<br>
+                  • <strong>웨어러블 컴퓨터</strong>: <span class="hl-green">소형화·경량화되어 신체나 옷에 착용</span>하는 컴퓨터
+                </div>
+              </div>
+            </div>
+            <div class="right-col anim-right">
+              <div class="morph-card">
+                <div class="morph-title">
+                  <span>📱 개인용 컴퓨터 형태별 크기 비교</span>
+                </div>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:14px;">
+                  <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; text-align:center;">
+                    <div style="font-size:20px;">🖥️</div>
+                    <div style="font-weight:800; color:#0284c7; margin-top:4px;">데스크톱</div>
+                    <div style="font-size:12px; color:#64748b;">책상 거치형 일반 PC</div>
+                  </div>
+                  <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; text-align:center;">
+                    <div style="font-size:20px;">💻</div>
+                    <div style="font-weight:800; color:#0284c7; margin-top:4px;">랩톱 / 노트북</div>
+                    <div style="font-size:12px; color:#64748b;">무릎/공책 크기 휴대용 PC</div>
+                  </div>
+                  <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; text-align:center;">
+                    <div style="font-size:20px;">📟</div>
+                    <div style="font-weight:800; color:#0284c7; margin-top:4px;">팜톱 (Palmtop)</div>
+                    <div style="font-size:12px; color:#64748b;">손바닥 위에 올려놓는 크기</div>
+                  </div>
+                  <div style="background:#f0fdf4; border:1px solid #86efac; border-radius:10px; padding:12px; text-align:center;">
+                    <div style="font-size:20px;">⌚</div>
+                    <div style="font-weight:800; color:#15803d; margin-top:4px;">웨어러블 PC ★</div>
+                    <div style="font-size:12px; color:#64748b;">스마트워치 등 신체 착용형</div>
+                  </div>
+                </div>
+                <div
+                  style="font-size: 13.5px; color: #15803d; background: #f0fdf4; padding: 10px; border-radius: 8px; border: 1px solid #86efac; margin-top: 14px;">
+                  💡 <strong>기출 지문 정답</strong>: "디지털의 정밀성과 아날로그의 고속 처리 능력을 결합한 컴퓨터는 <strong>하이브리드 컴퓨터</strong>이다."
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             SLIDE 12 : 🎯 킬러 함정 플립카드 ① (Interactive 3D Flip)
+             ======================================================== -->
+        <section class="slide"
+          data-notes="21단원부터 25단원까지의 킬러 함정 플립카드입니다. 작업 관리자에서 수행할 수 없는 작업, 레지스트리 실행 명령어, 네트워크 DOS 명령어 Ping과 Tracert의 명확한 차이점을 클릭하여 확인해 보세요.">
+          <div class="split-container">
+            <div class="left-col anim-left">
+              <div>
+                <div class="slide-tag">KILLER TRAP • PART 1</div>
+                <h2 class="slide-title">🎯 킬러 기출 함정 <span class="hl-green">플립카드 ①</span></h2>
+              </div>
+              <div class="info-card">
+                <div class="card-title">💡 플립 카드 학습 안내</div>
+                <div class="card-desc">
+                  • 우측 카드를 <strong>클릭</strong>하면 카드가 180도 회전하며 <strong>O/X 정답 및 기출 해설</strong>이 나타납니다.<br>
+                  • 시험 직전 실전 감각을 끌어올리기 위한 최고난도 OX 훈련입니다.
+                </div>
+              </div>
+              <div class="info-card success">
+                <div class="card-title">체크 포인트</div>
+                <div class="card-desc">
+                  • <strong>Q1</strong>: 작업 관리자에서 앱 실행 순서 변경 가능 여부<br>
+                  • <strong>Q2</strong>: 레지스트리 편집기 실행 명령어<br>
+                  • <strong>Q3</strong>: Ping과 Tracert의 역할 구별
+                </div>
+              </div>
+            </div>
+            <div class="right-col anim-right" style="gap: 12px; width: 100%; max-width: 530px;">
+              <div class="flip-container" onclick="this.classList.toggle('flipped')">
+                <div class="flipper">
+                  <div class="flip-front">
+                    <div style="font-weight: 800; color: #0284c7; margin-bottom: 4px; font-size: 14.5px;">Q1. 작업 관리자의 앱 실행 순서 변경</div>
+                    <div style="font-size: 13.5px;">"작업 관리자 창에서는 현재 실행 중인 프로그램들의 실행 순서를 사용자가 임의로 재배치하여 변경할 수 있다." (O / X?)</div>
+                  </div>
+                  <div class="flip-back">
+                    <div style="font-weight: 800; color: #dc2626; margin-bottom: 2px; font-size: 14.5px;">정답: X (실행 순서 변경 절대 불가!)</div>
+                    <div style="font-size: 13px;">작업 관리자에서는 프로세스의 강제 종료와 모니터링만 가능하며, <strong>실행 순서 변경은 할 수 없습니다</strong>!</div>
+                  </div>
+                </div>
+              </div>
+              <div class="flip-container" onclick="this.classList.toggle('flipped')">
+                <div class="flipper">
+                  <div class="flip-front">
+                    <div style="font-weight: 800; color: #0284c7; margin-bottom: 4px; font-size: 14.5px;">Q2. 레지스트리 실행 명령어</div>
+                    <div style="font-size: 13.5px;">"Windows 레지스트리 편집기를 실행하려면 [실행] 창에 'sysedit'을 입력해야 한다." (O / X?)</div>
+                  </div>
+                  <div class="flip-back">
+                    <div style="font-weight: 800; color: #dc2626; margin-bottom: 2px; font-size: 14.5px;">정답: X (정답은 regedit!)</div>
+                    <div style="font-size: 13px;">레지스트리 편집기 실행 명령어는 <strong>regedit</strong> 입니다!</div>
+                  </div>
+                </div>
+              </div>
+              <div class="flip-container" onclick="this.classList.toggle('flipped')">
+                <div class="flipper">
+                  <div class="flip-front">
+                    <div style="font-weight: 800; color: #0284c7; margin-bottom: 4px; font-size: 14.5px;">Q3. Ping 명령어의 주된 역할</div>
+                    <div style="font-size: 13.5px;">"Ping 명령어는 원격지 컴퓨터까지의 라우팅 경로를 단계별로 추적할 때 사용된다." (O / X?)</div>
+                  </div>
+                  <div class="flip-back">
+                    <div style="font-weight: 800; color: #dc2626; margin-bottom: 2px; font-size: 14.5px;">정답: X (경로 추적은 Tracert!)</div>
+                    <div style="font-size: 13px;">경로 추적은 <strong>Tracert</strong>이며, <strong>Ping</strong>은 원격지 연결 상태 및 응답 시간 점검용입니다!</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             SLIDE 13 : 🎯 킬러 함정 플립카드 ② (Interactive 3D Flip)
+             ======================================================== -->
+        <section class="slide"
+          data-notes="26단원부터 28단원까지의 킬러 함정 플립카드입니다. 에니악의 프로그램 내장 여부, 디지털 컴퓨터의 미적분 연산 여부, 그리고 아날로그 컴퓨터의 기억장치 필요 여부를 직접 클릭해서 풀어보세요.">
+          <div class="split-container">
+            <div class="left-col anim-left">
+              <div>
+                <div class="slide-tag">KILLER TRAP • PART 2</div>
+                <h2 class="slide-title">🎯 킬러 기출 함정 <span class="hl-green">플립카드 ②</span></h2>
+              </div>
+              <div class="info-card">
+                <div class="card-title">💡 실전 문제 풀이 팁</div>
+                <div class="card-desc">
+                  • 디지털 컴퓨터와 아날로그 컴퓨터의 '주요 연산'과 '기억장치 유무'는 시험 오답 보기의 단골 소재입니다.<br>
+                  • 카드를 클릭하여 완벽하게 정답을 각인시키세요.
+                </div>
+              </div>
+              <div class="info-card warning">
+                <div class="card-title">체크 포인트</div>
+                <div class="card-desc">
+                  • <strong>Q1</strong>: 최초의 전자계산기 에니악(ENIAC)의 방식<br>
+                  • <strong>Q2</strong>: 디지털 컴퓨터의 주요 연산 종류<br>
+                  • <strong>Q3</strong>: 아날로그 컴퓨터의 기억장치 필요성
+                </div>
+              </div>
+            </div>
+            <div class="right-col anim-right" style="gap: 12px; width: 100%; max-width: 530px;">
+              <div class="flip-container" onclick="this.classList.toggle('flipped')">
+                <div class="flipper">
+                  <div class="flip-front">
+                    <div style="font-weight: 800; color: #0284c7; margin-bottom: 4px; font-size: 14.5px;">Q1. 에니악(ENIAC)의 프로그램 내장 방식 여부</div>
+                    <div style="font-size: 13.5px;">"세계 최초의 전자식 계산기인 에니악(ENIAC)은 프로그램 내장 방식을 채택하였다." (O / X?)</div>
+                  </div>
+                  <div class="flip-back">
+                    <div style="font-weight: 800; color: #dc2626; margin-bottom: 2px; font-size: 14.5px;">정답: X (에니악은 '외부 프로그램' 방식!)</div>
+                    <div style="font-size: 13px;">에니악은 외부 배선 방식이며, <strong>최초의 프로그램 내장 방식 계산기는 에드삭(EDSAC)</strong>입니다!</div>
+                  </div>
+                </div>
+              </div>
+              <div class="flip-container" onclick="this.classList.toggle('flipped')">
+                <div class="flipper">
+                  <div class="flip-front">
+                    <div style="font-weight: 800; color: #0284c7; margin-bottom: 4px; font-size: 14.5px;">Q2. 디지털 컴퓨터의 주요 연산</div>
+                    <div style="font-size: 13.5px;">"디지털 컴퓨터는 증폭 회로를 이용하여 미적분 연산을 주로 수행한다." (O / X?)</div>
+                  </div>
+                  <div class="flip-back">
+                    <div style="font-weight: 800; color: #dc2626; margin-bottom: 2px; font-size: 14.5px;">정답: X (미적분 연산은 아날로그!)</div>
+                    <div style="font-size: 13px;">디지털 컴퓨터는 논리 회로를 이용해 <strong>산술 및 논리 연산</strong>을 수행합니다!</div>
+                  </div>
+                </div>
+              </div>
+              <div class="flip-container" onclick="this.classList.toggle('flipped')">
+                <div class="flipper">
+                  <div class="flip-front">
+                    <div style="font-weight: 800; color: #0284c7; margin-bottom: 4px; font-size: 14.5px;">Q3. 아날로그 컴퓨터의 기억장치 필요 여부</div>
+                    <div style="font-size: 13.5px;">"아날로그 컴퓨터는 데이터 처리를 위해 반드시 대용량 기억장치와 프로그램이 필요하다." (O / X?)</div>
+                  </div>
+                  <div class="flip-back">
+                    <div style="font-weight: 800; color: #dc2626; margin-bottom: 2px; font-size: 14.5px;">정답: X (기억장치 필요 없음!)</div>
+                    <div style="font-size: 13px;">아날로그 컴퓨터는 실시간 계측 신호를 즉시 연산하므로 <strong>기억장치와 프로그램이 필요 없습니다</strong>!</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             SLIDE 14 : 21~28단원 핵심 10대 공식 (Final Summary Matrix)
+             ======================================================== -->
+        <section class="slide"
+          data-notes="21단원부터 28단원까지 시험에 출제되는 10대 핵심 키워드 총정리 매트릭스입니다. 디스크 파티션 관리, 작업 관리자 실행 순서 및 용량 확인 불가, regedit, TCP/IP 4대 요소, Ping/Ipconfig/Tracert, 에니악 외부방식 vs 에드삭 내장방식, 1~5세대 특징, 그리고 디지털 vs 아날로그 비교표까지 이 핵심 요약을 반드시 숙지하세요.">
+          <div class="split-container">
+            <div class="left-col anim-left">
+              <div>
+                <div class="slide-tag">FINAL SUMMARY MATRIX</div>
+                <h2 class="slide-title">21~28단원 <span class="hl-green">핵심 10대 공식</span> 총정리</h2>
+              </div>
+              <div class="info-card">
+                <div class="card-title">1. 시스템 도구 & 네트워크 공식</div>
+                <div class="card-desc">
+                  • <strong>작업 관리자 불가</strong>: <span class="hl-green">실행 순서 변경 불가, 드라이브 용량 확인 불가</span><br>
+                  • <strong>레지스트리 실행</strong>: <span class="hl-green"><code>regedit</code></span><br>
+                  • <strong>네트워크 DOS</strong>: Ping(연결상태), Ipconfig(IP정보), Tracert(경로)
+                </div>
+              </div>
+              <div class="info-card success">
+                <div class="card-title">2. 컴퓨터 역사 & 분류 공식</div>
+                <div class="card-desc">
+                  • <strong>초기 계산기</strong>: 에니악(외부), 에드삭(최초내장), 에드박(폰노이만/2진법)<br>
+                  • <strong>세대 소자</strong>: 진공관 ➔ TR ➔ IC ➔ LSI ➔ VLSI<br>
+                  • <strong>디지털 컴퓨터</strong>: 이산 데이터, 논리 회로, 산술/논리, 무제한 정밀도
+                </div>
+              </div>
+            </div>
+            <div class="right-col anim-right">
+              <div class="morph-card" style="padding: 16px;">
+                <div class="morph-title">
+                  <span>🏆 기출 정답 1순위 키워드 요약표</span>
+                </div>
+                <table class="styled-table" style="font-size: 13px;">
+                  <thead>
+                    <tr>
+                      <th style="width: 25%;">단원</th>
+                      <th style="width: 35%;">핵심 주제</th>
+                      <th>기출 정답 키워드</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="font-weight:700;">22 작업관리자</td>
+                      <td>실행 제어 한계</td>
+                      <td>앱 실행 순서 변경 불가, 드라이브 용량 확인 불가</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight:700;">23 레지스트리</td>
+                      <td>계층적 시스템 DB</td>
+                      <td>실행 창에 <code>regedit</code> 입력</td>
+                    </tr>
+                    <tr style="background:#f0fdf4;">
+                      <td style="font-weight:700; color:#15803d;">25 DOS명령어</td>
+                      <td>네트워크 진단</td>
+                      <td>Ping(연결/손실률), Ipconfig(IP/MAC), Tracert(경로)</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight:700;">27 컴퓨터역사</td>
+                      <td>발전 세대 소자</td>
+                      <td>1세대(진공관/일괄) ~ 3세대(IC/시분할) ~ 5세대(AI)</td>
+                    </tr>
+                    <tr style="background:#fef2f2;">
+                      <td style="font-weight:700; color:#dc2626;">28 컴퓨터분류</td>
+                      <td>디지털 vs 아날로그</td>
+                      <td>디지털(논리회로/산술논리) vs 아날로그(증폭/미적분)</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div
+                  style="font-size: 13px; color: #15803d; background: #f0fdf4; padding: 8px 10px; border-radius: 8px; border: 1px solid #86efac; margin-top: 12px;">
+                  💡 위 10가지 공식은 실제 시험에서 매회 3~4문제 이상 출제되는 핵심 공식입니다!
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             SLIDE 15 : 기출 오답 판별 필승 공식 (Strategy Checkpoint)
+             ======================================================== -->
+        <section class="slide"
+          data-notes="기출 오답 판별 필승 공식입니다. 첫째, 작업 관리자 문제에서 실행 순서를 바꾼다거나 디스크 용량을 본다는 문장이 나오면 1초 만에 오답으로 골라내세요. 둘째, Ping과 Tracert의 설명을 뒤바꾼 문장을 조심하세요. 셋째, 디지털 컴퓨터에 '미적분 연산', '증폭 회로', '연속적인 데이터'라는 단어가 나오면 무조건 오답입니다. 이 3대 함정만 피하면 100점 만점이 가능합니다.">
+          <div class="split-container">
+            <div class="left-col anim-left">
+              <div>
+                <div class="slide-tag">EXAM PASS STRATEGY</div>
+                <h2 class="slide-title">기출 오답 판별 <span class="hl-green">필승 공식</span></h2>
+              </div>
+              <div class="info-card">
+                <div class="card-title">1. 작업 관리자 함정 판별법</div>
+                <div class="card-desc">
+                  • "실행 순서 변경" 또는 "드라이브 용량 확인" 문구가 나오면 ➔ <span class="warn-text">무조건 오답!</span>
+                </div>
+              </div>
+              <div class="info-card warning">
+                <div class="card-title">2. 네트워크 DOS 명령어 함정 판별법</div>
+                <div class="card-desc">
+                  • "경로 추적" ➔ <span class="hl-green">Tracert</span><br>
+                  • "원격지 연결 상태 및 응답 점검" ➔ <span class="hl-green">Ping</span><br>
+                  • "IP 주소, MAC 주소 확인" ➔ <span class="hl-green">Ipconfig</span>
+                </div>
+              </div>
+              <div class="info-card success">
+                <div class="card-title">3. 디지털 vs 아날로그 맞바꾸기 함정</div>
+                <div class="card-desc">
+                  • 디지털에 "미적분", "증폭 회로"가 붙으면 ➔ <span class="warn-text">오답!</span>
+                </div>
+              </div>
+            </div>
+            <div class="right-col anim-right">
+              <div class="morph-card" style="padding: 24px;">
+                <div class="morph-title">
+                  <span>🎯 시험장 직전 핵심 체크포인트</span>
+                </div>
+                <div class="excel-morph-grid">
+                  <div class="e-cell header">문제 유형</div>
+                  <div class="e-cell header">정답 공식</div>
+                  <div class="e-cell" style="font-weight:700;">디스크 파티션</div>
+                  <div class="e-cell">[컴퓨터 관리]-[저장소]-[디스크 관리]</div>
+                  <div class="e-cell" style="font-weight:700;">레지스트리</div>
+                  <div class="e-cell">실행 창에서 <code>regedit</code></div>
+                  <div class="e-cell" style="font-weight:700;">최초 내장 방식</div>
+                  <div class="e-cell active-green"><strong>에드삭(EDSAC)</strong> (에니악 X)</div>
+                  <div class="e-cell" style="font-weight:700;">하이브리드</div>
+                  <div class="e-cell">디지털 + 아날로그 장점 결합</div>
+                </div>
+                <div
+                  style="font-size: 13.5px; color: #15803d; background: #f0fdf4; padding: 10px; border-radius: 8px; border: 1px solid #86efac; margin-top: 14px;">
+                  💡 시험장에서 문제 지문을 꼼꼼히 읽고 함정 키워드를 빠르게 걸러내세요!
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             SLIDE 16 : 합격 응원 카드 (Completion & Closing)
+             ======================================================== -->
+        <section class="slide"
+          data-notes="수고 많으셨습니다. 21단원 관리 도구부터 28단원 컴퓨터 분류까지의 모든 내용을 정리했습니다. 이제 다음 파트인 자료의 표현 단위와 CPU 제어장치로 넘어가겠습니다. 여러분의 컴활 2급 필기 합격을 진심으로 응원합니다!">
+          <div style="margin: auto; text-align: center; max-width: 860px;">
+            <div style="font-size: 56px; margin-bottom: 16px;">🎉</div>
+            <div class="title-badge">1과목 컴퓨터 일반 • 4페이지 완전 정복</div>
+            <h2 class="title-h1" style="font-size: 38px;">21~28단원 학습을<br><span>완벽하게 완료하셨습니다!</span></h2>
+            <p class="title-sub" style="font-size: 17px; margin-bottom: 24px;">
+              디스크 파티션 관리, 작업 관리자, 레지스트리, 네트워크 DOS 명령어, 컴퓨터 발전 5세대, 그리고 디지털 vs 아날로그 컴퓨터 비교까지 핵심 이론과 기출 함정을 마스터했습니다.
+            </p>
+            <div style="display: flex; gap: 12px; justify-content: center;">
+              <button onclick="goTo(1)"
+                style="background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; padding:10px 22px; border-radius:10px; font-weight:700; cursor:pointer; font-size:14.5px; transition:all 0.2s;"
+                onmouseover="this.style.background='#e2e8f0'" onmouseout="this.style.background='#f1f5f9'">
+                첫 슬라이드로 돌아가기 ↺
+              </button>
+              <button onclick="goTo(2)"
+                style="background:#0284c7; color:#fff; border:none; padding:10px 22px; border-radius:10px; font-weight:800; cursor:pointer; font-size:14.5px; box-shadow:0 4px 12px rgba(2,132,199,0.3); transition:all 0.2s;"
+                onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                목차 다시 보기 📑
+              </button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- 발표자 강의 대본창 (Speaker Notes Drawer) -->
+    <div class="speaker-notes-drawer" id="notesDrawer">
+      <div class="notes-header">
+        <div class="notes-title">
+          <span>🎙️ 발표자 강의 대본 (Speaker Script)</span>
+          <span style="font-size:12px; color:#64748b; font-weight:normal;">(단축키: N 또는 S 키로 대본창 접기/펼치기)</span>
+        </div>
+        <button class="ctrl-btn" onclick="toggleNotes()">대본창 닫기 ✕</button>
+      </div>
+      <div class="notes-content" id="notesContent">
+        대본이 여기에 표시됩니다.
+      </div>
+    </div>
+
+    <!-- 하단 키보드 단축키 안내 바 -->
+    <footer class="key-shortcuts-bar">
+      <span><kbd>◀</kbd> / <kbd>Backspace</kbd> 이전</span>
+      <span><kbd>▶</kbd> / <kbd>Space</kbd> / <kbd>Enter</kbd> 다음</span>
+      <span><kbd>F</kbd> 전체화면</span>
+      <span><kbd>N</kbd> / <kbd>S</kbd> 발표자 대본창</span>
+      <span><kbd>Home</kbd> / <kbd>End</kbd> 처음 / 끝</span>
+    </footer>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const curSlideNumEl = document.getElementById('curSlideNum');
+    const totalSlideNumEl = document.getElementById('totalSlideNum');
+    const progressBar = document.getElementById('progressBar');
+    const notesDrawer = document.getElementById('notesDrawer');
+    const notesContent = document.getElementById('notesContent');
+    const presentationContainer = document.getElementById('presentationContainer');
+
+    totalSlideNumEl.textContent = String(totalSlides).padStart(2, '0');
+
+    function updateSlide(index) {
+      if (index < 0) index = 0;
+      if (index >= totalSlides) index = totalSlides - 1;
+
+      slides.forEach((s, idx) => {
+        s.classList.remove('active');
+        if (idx === index) {
+          s.classList.add('active');
+        }
+      });
+
+      currentSlide = index;
+      curSlideNumEl.textContent = String(currentSlide + 1).padStart(2, '0');
+
+      // 상단 프로그레스 바 갱신
+      const progressPercent = totalSlides > 1 ? (currentSlide / (totalSlides - 1)) * 100 : 100;
+      progressBar.style.width = `${progressPercent}%`;
+
+      // 대본창 내용 갱신
+      const notes = slides[currentSlide].getAttribute('data-notes') || '해당 슬라이드에 등록된 강의 대본이 없습니다.';
+      notesContent.innerHTML = notes;
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        updateSlide(currentSlide + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        updateSlide(currentSlide - 1);
+      }
+    }
+
+    function goTo(slideNumber) {
+      updateSlide(slideNumber - 1);
+    }
+
+    function toggleNotes() {
+      notesDrawer.classList.toggle('open');
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        if (presentationContainer.requestFullscreen) {
+          presentationContainer.requestFullscreen();
+        } else if (presentationContainer.webkitRequestFullscreen) {
+          presentationContainer.webkitRequestFullscreen();
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    // 키보드 내비게이션
+    window.addEventListener('keydown', (e) => {
+      // 텍스트 입력창에서는 키보드 제어 방지
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown' || e.key === 'Enter') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'Backspace' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'n' || e.key === 'N' || e.key === 's' || e.key === 'S') {
+        e.preventDefault();
+        toggleNotes();
+      } else if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        toggleFullscreen();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        updateSlide(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        updateSlide(totalSlides - 1);
+      }
+    });
+
+    // 모바일 터치 스와이프 내비게이션
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    window.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    window.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleGesture();
+    }, { passive: true });
+
+    function handleGesture() {
+      const swipeDistance = touchEndX - touchStartX;
+      if (Math.abs(swipeDistance) > 50) {
+        if (swipeDistance < 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    }
+
+    // 초기화
+    updateSlide(0);
+  </script>
+</body>
+
+</html>

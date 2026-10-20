@@ -1,95 +1,361 @@
-# Education
+# make-slide 🎯
 
-## Design Philosophy / 디자인 철학
-**EN:** Designed specifically for education, certification exams, academic lectures, and technical training. Built on a clean white and soft slate canvas (`#f8fafc` / `#ffffff`) to minimize eye fatigue during extended study sessions. A structured 50:50 split container pairs concise theoretical notes on the left with interactive simulators, comparison tables, and 3D quiz cards on the right. High-visibility fluorescent green underlines (`#dcfce7` / `#22c55e`), color-coded status badges, and tactile keyboard keycaps turn complex, dense curricula into memorable visual formulas.
+**AI-powered presentation skill that generates stunning single-file HTML slide decks.**
+**AI 코딩 에이전트가 단일 HTML 파일로 고품질 프레젠테이션을 생성하는 범용 스킬.**
 
-**KO:** 교육, 자격증 수험, 대학 강의, 기술 직무 교육을 위해 특화 설계된 테마입니다. 장시간 학습에도 눈이 편안한 소프트 슬레이트 및 화이트 캔버스(`#f8fafc` / `#ffffff`)를 바탕으로, 좌측에는 핵심 이론 요약 카드를, 우측에는 시뮬레이터·비교 표·3D 퀴즈 카드를 배치하는 50:50 분할 구조를 채택했습니다. 초록색 형광펜 밑줄 하이라이트(`.hl-green`), 직관적인 신호등 컬러 뱃지, 실감 나는 입체 키보드 키캡(`.key-badge`)을 통해 방대하고 복잡한 수험 이론을 직관적으로 각인시키고 합격으로 이끌어 줍니다.
-
----
-
-## Color Palette / 색상 팔레트
-| Role | Value | Preview | 설명 |
-|------|-------|---------|------|
-| Canvas Background | `#ffffff` | ⬜ | 메인 슬라이드 캔버스 및 카드 배경 |
-| Stage / Frame Background | `#f1f5f9` | ⬜ | 캔버스 외부 스테이지 및 컨트롤 바 배경 |
-| Body Background | `#f8fafc` | ⬜ | 최외곽 본문 베이스 배경 |
-| Primary Accent (Blue) | `#0284c7` | 🔵 | 메인 브랜드, 슬라이드 태그, 단원 타이틀 |
-| Primary Light | `#e0f2fe` | 🔵 | 태그 배경, 단원 뱃지 배경 |
-| Success Accent (Emerald) | `#059669` | 🟢 | 성공 메시지, 정답 체크, 대본창 헤더 |
-| Fluorescent Highlight (Green) | `#dcfce7` | 🟩 | 핵심 키워드 형광펜 하이라이트 배경 (하단 `#22c55e` 보더) |
-| Highlight Text | `#15803d` | 🟢 | 형광펜 내부 강조 텍스트 색상 |
-| Warning / Killer Trap (Rose) | `#e11d48` | 🔴 | 기출 오답 함정, 주의 사항, X 판별 |
-| Warning Light | `#fff1f2` | 🔴 | 함정 카드 및 오답 박스 배경 |
-| Notice / Warning (Amber) | `#d97706` | 🟡 | 주의 알림, 중간 요약 포인트 |
-| Category Accent (Purple) | `#7c3aed` | 🟣 | 고난도 토픽, 부가 분류 체계 |
-| Primary Text | `#0f172a` | ⬛ | 헤드라인, 메인 타이틀 (Slate 900) |
-| Secondary Text | `#334155` | 🔘 | 카드 본문, 일반 설명 텍스트 (Slate 700) |
-| Muted Text | `#64748b` | 🔘 | 부가 설명, 카운터, 비활성 텍스트 (Slate 500) |
-| Border / Divider | `#e2e8f0` | ⬜ | 카드 및 테이블 경계선 (Slate 200) |
+[![Live Gallery](https://img.shields.io/badge/🎨_Theme_Gallery-Live_Demo-blue?style=for-the-badge)](https://make-slide.vercel.app)
+[![npm](https://img.shields.io/npm/v/make-slide?style=for-the-badge)](https://www.npmjs.com/package/make-slide)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
 ---
 
-## Typography / 타이포그래피
-| Element | Font | Weight | Size | Notes |
-|---------|------|--------|------|-------|
-| Title H1 | Pretendard | 900 | 48px | Line-height 1.25, Blue-Emerald 그라디언트 텍스트 지원 |
-| Title Sub | Pretendard | 600 | 18px ~ 20px | Line-height 1.6, Slate 600 |
-| Slide Title (H2) | Pretendard | 800 | 30px ~ 32px | Line-height 1.35, letter-spacing -0.02em |
-| Slide Tag / Overline | Pretendard | 800 | 18px ~ 24px | Blue 컬러, 좌측 8px 세로 바 포인트 |
-| Card Title | Pretendard | 700 | 18px ~ 20px | 상태별 컬러 연동 (Blue/Rose/Emerald/Purple) |
-| Card Body / Desc | Pretendard | 500 ~ 600 | 15px ~ 16px | Line-height 1.6 ~ 1.65 |
-| Table / Metric Text | Pretendard | 500 ~ 700 | 13px ~ 14px | 정밀한 그리드 및 표 데이터 표기 |
-| Code / Keyboard Keycap | JetBrains Mono | 700 ~ 800 | 13px ~ 14px | 단축키, 명령어(`regedit`, `Ping`), 수치 |
-| Slide Counter / Badges | JetBrains Mono / Pretendard | 700 | 14px | 상단바 과목 뱃지 및 `01 / 16` 카운터 |
+## What is make-slide?
+
+**make-slide** is a skill (instruction set) for AI coding agents — like Claude Code, Gemini CLI, Codex, Cursor, and others — that enables them to generate professional presentation slides as a **single HTML file**.
+
+Instead of crafting designs from scratch every time (wasting tokens and producing inconsistent results), the AI references pre-built theme templates from this repository. The result is:
+
+- **Token-efficient** — AI fetches a reference file instead of inventing layouts
+- **Consistent quality** — every presentation follows a polished, tested design system
+- **Zero dependencies** — output is one `.html` file you can open anywhere
+
+> Think of it as a **design system for AI-generated presentations**.
 
 ---
 
-## Special Effects & Components / 특수 효과 및 컴포넌트
-- **Card-in-Stage Architecture**: 전체 화면 속 1320x720 둥근 모서리의 독립 화이트 캔버스(`box-shadow: 0 20px 40px -15px rgba(15,23,42,0.08)`)로 설계되어 시각적 집중도를 극대화
-- **Fluorescent Green Highlight (`.hl-green`)**: 형광펜을 그은 듯한 연두색 배경(`#dcfce7`)과 초록 텍스트(`#15803d`), 하단 2.5px 초록 실선(`border-bottom: 2.5px solid #22c55e`)으로 핵심 암기 포인트 강조
-- **Color-Coded Status Cards (`.info-card`)**: Blue(기본 이론), Rose(기출 함정/주의), Emerald(정답/공식), Amber(알림), Purple(고난도)의 5px 좌측 컬러 보더 시스템
-- **Tactile Keyboard Keycaps (`.key-badge`)**: 실제 물리 키보드 키캡을 누르는 듯한 입체 음영(`box-shadow: 0 2px 0 #94a3b8`)과 Windows 로고 키 SVG 인라인 지원
-- **Interactive 3D Flip Card (`.flip-container`)**: 앞면에는 기출 문제(Q)를 보여주고, 클릭 시 180도 Y축 3D 회전하여 뒷면의 정답(O/X)과 해설을 노출하는 암기 훈련 카드
-- **Interactive Morph / Jump Buttons (`.morph-btn`)**: 목차 및 시뮬레이터 카드에서 특정 슬라이드로 즉시 이동하거나 상태를 전환하는 인터랙티브 버튼
-- **Structured Comparison Tables (`.styled-table`)**: 디지털 vs 아날로그, 네트워크 3대 명령어 등 출제 빈출 비교를 일목요연하게 정리하는 정밀 표 컴포넌트
-- **Integrated Speaker Notes Drawer (`.speaker-notes-drawer`)**: `N` 또는 `S` 키 입력 시 하단에서 부드럽게 슬라이드 업되는 일체형 강의 대본창 (`data-notes` 실시간 연동)
-- **Floating Side Nav Arrows (`.side-nav-arrow`)**: 캔버스 좌우에 마우스 호버 시 부드럽게 확대되는 플로팅 내비게이션 버튼
+## ✨ Features
+
+| Feature | Description |
+|---------|-------------|
+| 🎨 **10 Themes** | From dark minimal to playful pastels — [browse the gallery](https://make-slide.vercel.app) |
+| 📄 **Single HTML Output** | One file, no build step, no framework — just open in a browser |
+| 🎤 **Speaker Notes** | Built-in presenter mode with per-slide notes (press `S`) |
+| 🖨️ **PDF Export** | Print-ready via `Ctrl+P` with clean `@media print` styles |
+| 🖥️ **Fullscreen** | One-key fullscreen toggle (press `F`) |
+| ⌨️ **Keyboard Navigation** | Arrow keys, spacebar, touch/swipe support |
+| 📥 **3 Input Modes** | Topic only / Content provided / Script provided |
+| 📐 **4 Layout Styles** | Centered, Wide, Split, Editorial — [browse layouts](https://make-slide.vercel.app) |
+| 📊 **PPTX Export** | Generate PowerPoint files alongside HTML |
+| 🖼️ **Auto Image Search** | Automatically find and place relevant images from Unsplash |
+| 🤖 **Works with Any AI Tool** | Claude Code, Gemini CLI, Codex, Cursor, and more |
+| 🌍 **Language-Agnostic** | Generates content in whatever language you speak |
+| 📊 **CSS-Only Charts** | Bar charts, progress rings, KPI cards — no chart library needed |
 
 ---
 
-## Use Cases / 적합한 용도
-**EN:**
-- IT & engineering certification exam preparation (CompTIA, AWS, Cisco, Engineer exams)
-- University lectures, academic seminars, and curriculum walkthroughs
-- Corporate employee training, onboarding, and job qualification courses
-- Software operation guides, shortcuts cheatsheets, and troubleshooting manuals
-- Video lecture (E-learning/MOOC) presentation decks requiring speaker notes
-- Interactive quizzes, OX flashcards, and high-stakes memorization drills
+## 🚀 Quick Start
 
-**KO:**
-- 국가 기술/전문 자격증 수험 강의 (컴퓨터활용능력, 정보처리기사, 전기기사, 공공조달관리사 등)
-- 대학교 전공 강의, 학술 세미나, 공무원/임용고시 수험 프레젠테이션
-- 기업 임직원 직무 교육, 신규 입사자 온보딩, 직무 자격 교육 자료
-- 소프트웨어 기능 설명, 단축키 치트시트, 시스템 설정 가이드
-- 온라인 인강 및 동영상 강의 제작용 슬라이드 (강의 대본 실시간 지원)
-- 킬러 기출 함정 파훼, OX 플립 퀴즈, 핵심 공식 총정리 슬라이드
+### Install with npx (Recommended)
+
+```bash
+npx make-slide init
+```
+
+This will:
+1. Copy the skill files into your project's `.claude/skills/make-slide/`
+2. Auto-detect your AI config (`CLAUDE.md`, `AGENTS.md`, `GEMINI.md`, `.cursorrules`) and inject the `/make-slide` command
+3. You're ready! Type `/make-slide` in Claude Code to create presentations
+
+### Other Commands
+
+```bash
+npx make-slide themes    # View all 10 themes
+npx make-slide gallery   # Open theme gallery in browser
+npx make-slide help      # Show help
+```
+
+### Manual Setup (Any AI Tool)
+
+Give your AI coding tool the following instruction:
+
+```
+Read SKILL.md from https://github.com/kuneosu/make-slide and create a presentation about [your topic] using the minimal-dark theme.
+```
+
+Or fetch it directly:
+```
+Fetch https://raw.githubusercontent.com/kuneosu/make-slide/main/.claude/skills/make-slide/SKILL.md and follow its instructions to create a presentation about [your topic].
+```
+
+> **Tip:** Browse themes first at [make-slide.vercel.app](https://make-slide.vercel.app) and tell your AI which one you like!
 
 ---
 
-## Slide Types / 슬라이드 타입
-`reference.html`에 포함된 14가지 수험·교육 특화 슬라이드 타입:
+## ⚙️ How It Works
 
-1. **Title** — 개정 연도 뱃지, Blue-Emerald 그라디언트 헤드라인, 서브타이틀, "강의 시작하기" 및 "목차 바로가기" 버튼
-2. **Agenda & Roadmap** — 4개 핵심 영역 컬러풀 인포 카드 + 우측 빠른 단원 점프 매트릭스 버튼 그리드
-3. **Concept & Split (Basic Theory)** — 좌측 핵심 이론 및 형광 하이라이트 + 우측 파티션/스토리지 작업 시뮬레이터 표
-4. **Warning & Trap (Error Prevention)** — 좌측 기출 함정 주의 카드 + 우측 작업 관리자 기능 O/X 판별표
-5. **Command & System Tree (Hierarchy)** — 단축키 키캡 뱃지(`Ctrl`, `Win+R`, `regedit`) + 시스템 레지스트리 계층 트리 뷰
-6. **Data & Protocol (Mapping Specs)** — TCP/IP 4대 요소 이론 + IPv4 네트워크 어댑터 속성 대화상자 매핑 표
-7. **Comparison Matrix (3-Way Compare)** — Ping vs Ipconfig vs Tracert 네트워크 DOS 3대 명령어 삼각 비교 매트릭스
-8. **Concept & Principles (EDPS & 5 Functions)** — 자료(Data) ➔ 정보(Information) 변환 개념 및 컴퓨터 5대 장치, 6대 특징 그리드
-9. **Evolution & Timeline (5 Generations)** — 초기 4대 전자계산기(ENIAC, EDSAC, EDVAC, UNIVAC) 및 1~5세대 발전 요약 매트릭스
-10. **Killer Comparison Table (Digital vs Analog)** — 최다 빈출 디지털 vs 아날로그 6대 비교 항목 정밀 매트릭스
-11. **Category & Icon Grid (Scale & Shapes)** — 데스크톱, 노트북, 팜톱, 웨어러블 4분할 아이콘 카드 그리드
-12. **Interactive 3D Flip Cards (OX Quiz Part 1)** — 클릭 시 180도 회전하여 정답과 오답 함정을 각인시키는 3단 플립 카드
-13. **Final Summary Matrix (10 Big Formulas)** — 21~28단원 핵심 10대 공식 및 기출 정답 1순위 키워드 요약 테이블
-14. **Completion & Closing** — 완강 축하 이모지, 핵심 이론 마스터 축하 메시지, 첫 슬라이드 및 목차 재이동 버튼
+### The `.claude/skills/` Convention
+
+make-slide uses Claude Code's native skill system. After running `npx make-slide init`, your project gets:
+
+```
+your-project/
+├── .claude/
+│   └── skills/
+│       └── make-slide/
+│           ├── SKILL.md          ← Main instruction file
+│           └── references/
+│               ├── themes.md        ← 10 themes + GitHub raw URLs
+│               ├── layouts.md       ← 4 layout styles
+│               ├── slide-types.md   ← 12 slide type patterns
+│               ├── html-spec.md     ← HTML requirements
+│               ├── core-features.md ← Copy-paste JS/CSS for features
+│               └── pptx-spec.md     ← PPTX conversion rules
+├── CLAUDE.md                        ← Auto-updated with /make-slide command
+└── ... your project files
+```
+
+When you type `/make-slide` in Claude Code, it reads the skill and follows a 10-step workflow:
+
+1. **Analyze input** — mode (topic / content / script), slide count, output format (HTML / PPTX)
+2. **Choose a theme** — pick from the [gallery](https://make-slide.vercel.app) or AI recommends
+3. **Choose a layout** — Centered, Wide, Split, or Editorial
+4. **Image options** — no images / provide URLs / auto-search from Unsplash
+5. **Generate outline** — slide-by-slide plan for your approval
+6. **Fetch theme + layout reference** — downloads templates from GitHub
+7. **Generate HTML** — builds presentation matching theme + layout exactly
+8. **Add speaker notes** — popup window with timing cues
+9. **Generate script** — full speaking script (optional)
+10. **Deliver** — saves `index.html` (and `presentation.pptx` if PPTX mode)
+
+Theme files are fetched from GitHub on demand — nothing heavy is stored locally.
+
+---
+
+## 🎨 Themes
+
+All 11 themes are live at **[make-slide.vercel.app](https://make-slide.vercel.app)**
+
+| # | Theme | Style | Best For |
+|:-:|-------|-------|----------|
+| 1 | `minimal-dark` | Clean dark, white typography | Tech talks, conferences |
+| 2 | `minimal-light` | Bright white, precise type | General, academic |
+| 3 | `corporate` | Navy & gold, structured | Business, reports |
+| 4 | `gradient-pop` | Vibrant gradients, glassmorphism | Startups, pitches |
+| 5 | `neon-terminal` | Terminal green, scanlines | Dev talks, hackathons |
+| 6 | `paper` | Kraft paper, serif type | Education, workshops |
+| 7 | `keynote-apple` | Dramatic dark, Apple-inspired | Product launches, keynotes |
+| 8 | `magazine` | Editorial, asymmetric layout | Design, creative |
+| 9 | `data-focus` | Dashboard aesthetic, clean | Data analysis, KPIs |
+| 10 | `playful` | Rounded, pastel, bouncy | Workshops, casual talks |
+| 11 | `education` | White canvas, green highlights, split cards | Education, exams, lectures |
+
+---
+
+## 📁 Project Structure
+
+```
+make-slide/
+├── package.json            # npm package config
+├── bin/cli.js              # CLI (init, themes, gallery)
+├── .claude/skills/make-slide/  # Skill template (copied by init)
+│   ├── SKILL.md
+│   └── references/
+│       ├── themes.md
+│       ├── layouts.md
+│       ├── slide-types.md
+│       ├── html-spec.md
+│       ├── core-features.md
+│       └── pptx-spec.md
+├── layouts/                # Layout references (4 styles)
+│   ├── centered/
+│   ├── wide/
+│   ├── split/
+│   └── editorial/
+├── SKILL.md                # Legacy standalone skill file
+├── README.md               # This file
+├── LICENSE                  # MIT License
+│
+├── themes/                 # Theme references (10 themes)
+│   ├── minimal-dark/
+│   │   ├── README.md           # Design guidelines
+│   │   └── reference.html      # Full example presentation
+│   ├── minimal-light/
+│   ├── corporate/
+│   ├── gradient-pop/
+│   ├── neon-terminal/
+│   ├── paper/
+│   ├── keynote-apple/
+│   ├── magazine/
+│   ├── data-focus/
+│   └── playful/
+│
+├── gallery/                # Theme gallery website (Vercel)
+│   └── index.html
+│
+├── core/                   # Shared JS/CSS source
+│   ├── navigation.js
+│   ├── fullscreen.js
+│   ├── speaker-notes.js
+│   ├── pdf-export.css
+│   └── base.css
+│
+└── examples/               # Example presentations
+    └── pineone-talk-reference.html
+```
+
+---
+
+## 🤝 Contributing
+
+### Adding a New Theme
+
+1. Create a folder in `themes/` with your theme ID (kebab-case):
+   ```
+   themes/your-theme-name/
+   ```
+
+2. Add these files:
+   - `reference.html` — Complete 10-slide example with all slide types, navigation, fullscreen, speaker notes, and PDF export
+   - `README.md` — Design guidelines: color palette, typography, spacing, philosophy
+
+3. Follow the conventions in `core/` for navigation, fullscreen, speaker notes, and PDF export
+
+4. Submit a PR — your theme will appear in the gallery!
+
+### Guidelines
+- Output must be a single `.html` file — all CSS/JS inlined
+- Only external dependencies: font CDNs (Pretendard required) + Prism.js (for code blocks)
+- All themes must support the full slide type set
+- Test keyboard navigation, fullscreen, speaker notes, and print export
+
+---
+
+## 📜 License
+
+[MIT](LICENSE) — use freely for personal and commercial projects.
+
+---
+---
+
+<br>
+
+# make-slide 🎯 (한국어)
+
+**AI 코딩 에이전트가 단일 HTML 파일로 고품질 프레젠테이션을 생성하는 범용 스킬.**
+
+[![테마 갤러리](https://img.shields.io/badge/🎨_테마_갤러리-라이브_데모-blue?style=for-the-badge)](https://make-slide.vercel.app)
+[![npm](https://img.shields.io/npm/v/make-slide?style=for-the-badge)](https://www.npmjs.com/package/make-slide)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+
+---
+
+## make-slide란?
+
+**make-slide**는 Claude Code, Gemini CLI, Codex, Cursor 등 AI 코딩 에이전트를 위한 스킬(지침서)입니다. AI가 이 스킬을 읽고 따라하면 전문적인 프레젠테이션 슬라이드를 **단일 HTML 파일**로 생성합니다.
+
+매번 처음부터 디자인을 만드는 대신(토큰 낭비 + 일관성 없는 결과), AI가 이 레포의 사전 제작된 테마 템플릿을 참조합니다:
+
+- **토큰 절약** — AI가 레이아웃을 발명하는 대신 레퍼런스 파일을 가져옴
+- **일관된 품질** — 모든 프레젠테이션이 검증된 디자인 시스템을 따름
+- **제로 의존성** — 결과물은 어디서나 열 수 있는 `.html` 파일 하나
+
+> **AI 생성 프레젠테이션을 위한 디자인 시스템**이라고 생각하세요.
+
+---
+
+## 🚀 빠른 시작
+
+### npx로 설치 (권장)
+
+```bash
+npx make-slide init
+```
+
+이 명령어는:
+1. `.claude/skills/make-slide/`에 스킬 파일 복사
+2. AI 설정 파일(`CLAUDE.md`, `AGENTS.md`, `GEMINI.md`, `.cursorrules`) 자동 감지 후 `/make-slide` 명령어 주입
+3. 준비 완료! Claude Code에서 `/make-slide` 입력하면 프레젠테이션 생성
+
+### 기타 명령어
+
+```bash
+npx make-slide themes    # 10개 테마 보기
+npx make-slide gallery   # 테마 갤러리 열기
+npx make-slide help      # 도움말
+```
+
+### 수동 설정 (다른 AI 도구)
+
+AI 코딩 도구에 다음과 같이 지시하세요:
+
+```
+https://github.com/kuneosu/make-slide 의 SKILL.md를 읽고 [주제]에 대한 프레젠테이션을 minimal-dark 테마로 만들어줘.
+```
+
+> **팁:** [make-slide.vercel.app](https://make-slide.vercel.app)에서 테마를 먼저 둘러보고 마음에 드는 것을 AI에게 알려주세요!
+
+---
+
+## ⚙️ 작동 방식
+
+### `.claude/skills/` 컨벤션
+
+`npx make-slide init` 실행 후 프로젝트 구조:
+
+```
+your-project/
+├── .claude/
+│   └── skills/
+│       └── make-slide/
+│           ├── SKILL.md          ← 메인 지침서
+│           └── references/
+│               ├── themes.md        ← 10개 테마 + GitHub raw URL
+│               ├── layouts.md       ← 4가지 레이아웃 스타일
+│               ├── slide-types.md   ← 12가지 슬라이드 타입
+│               ├── html-spec.md     ← HTML 요구사항
+│               ├── core-features.md ← 기본 기능 JS/CSS 코드
+│               └── pptx-spec.md     ← PPTX 변환 규칙
+├── CLAUDE.md                     ← /make-slide 명령어 자동 추가
+└── ... 프로젝트 파일들
+```
+
+Claude Code에서 `/make-slide` 입력하면 9단계 워크플로우를 따릅니다:
+
+1. **입력 분석** — 모드(주제/내용/대본), 슬라이드 수, 출력 형식(HTML/PPTX) 결정
+2. **테마 선택** — [갤러리](https://make-slide.vercel.app)에서 선택하거나 AI가 추천
+3. **레이아웃 선택** — Centered, Wide, Split, Editorial 중 선택
+4. **이미지 옵션** — 없음 / URL 제공 / Unsplash 자동 검색
+5. **아웃라인 생성** — 슬라이드별 구성 승인
+6. **테마 + 레이아웃 레퍼런스** — GitHub에서 템플릿 다운로드
+7. **HTML 생성** — 테마 + 레이아웃에 맞는 프레젠테이션 빌드
+8. **발표자 노트** — 팝업 윈도우 방식, 타이밍 큐 포함
+9. **대본 생성** — 전체 발표 대본 (선택)
+10. **전달** — `index.html` 저장 (PPTX 모드면 `presentation.pptx`도)
+
+테마 파일은 GitHub에서 온디맨드로 가져옵니다 — 로컬에 무거운 파일이 저장되지 않습니다.
+
+---
+
+## 🎨 테마
+
+10개 테마 모두 **[make-slide.vercel.app](https://make-slide.vercel.app)** 에서 확인할 수 있습니다.
+
+| # | 테마 | 스타일 | 추천 용도 |
+|:-:|------|--------|-----------|
+| 1 | `minimal-dark` | 다크 배경, 화이트 타이포 | 테크 발표, 컨퍼런스 |
+| 2 | `minimal-light` | 화이트 배경, 클린 타이포 | 일반 발표, 세미나 |
+| 3 | `corporate` | 네이비 & 골드, 구조적 | 비즈니스, 보고 |
+| 4 | `gradient-pop` | 비비드 그라디언트, 글라스모피즘 | 스타트업, 피칭 |
+| 5 | `neon-terminal` | 터미널 그린, 스캔라인 | 개발자 발표, 해커톤 |
+| 6 | `paper` | 크래프트지, 세리프 타이포 | 교육, 워크숍 |
+| 7 | `keynote-apple` | 드라마틱 다크, Apple 스타일 | 제품 발표, 키노트 |
+| 8 | `magazine` | 에디토리얼, 비대칭 레이아웃 | 디자인, 크리에이티브 |
+| 9 | `data-focus` | 대시보드 스타일, 깔끔 | 데이터 분석, KPI |
+| 10 | `playful` | 둥근 모서리, 파스텔, 바운스 | 워크숍, 캐주얼 발표 |
+
+---
+
+## 🤝 기여하기
+
+### 새 테마 추가하기
+
+1. `themes/` 안에 테마 ID로 폴더 생성 (케밥 케이스)
+2. `reference.html` + `README.md` 추가
+3. `core/`의 컨벤션을 따르기
+4. PR 제출 — 갤러리에 자동 추가!
+
+---
+
+## 📜 라이선스
+
+[MIT](LICENSE) — 개인 및 상업 프로젝트에 자유롭게 사용하세요.
